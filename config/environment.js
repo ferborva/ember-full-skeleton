@@ -4,6 +4,20 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'fameskeleton',
     environment: environment,
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' https://cdn.firebase.com/ *",
+      'font-src': "'self' 'unsafe-inline' *",
+      'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com",
+      'img-src': "'self' 'unsafe-inline' *",
+      'style-src': "'self' 'unsafe-inline' *",
+      'media-src': "'self'",
+      'frame-src': "'self' 'unsafe-inline' *"
+    },
+    firebase: 'https://cfmcom.firebaseio.com/',
+    torii: {
+      sessionServiceName: 'session'
+    },
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -16,6 +30,9 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    sassOptions: {
+      includePaths: ['bower_components/materialize/sass']
     }
   };
 
