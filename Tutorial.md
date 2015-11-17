@@ -189,6 +189,8 @@ Go to your github account. Create new repo, with NO README.md file
 
   Pointing to your newly created project.
 
+  Finish the job with: git push -u origin master
+
 
 
 
