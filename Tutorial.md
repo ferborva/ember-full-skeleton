@@ -157,6 +157,21 @@ AUTH WITH USER AND PASSWORD, instead of github, twitter ...
 
 
 
+EMBER - i18n
+------------
+
+Link: https://github.com/jamesarosen/ember-i18n
+
+Installation link: https://github.com/jamesarosen/ember-i18n/wiki/Doc:-Installation
+
+Follow the rest of the documentation:
+
+https://github.com/jamesarosen/ember-i18n/wiki/Doc:-Defining-Translations
+
+and others ...
+
+
+
 
 GITHUB
 ------
