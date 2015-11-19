@@ -171,6 +171,57 @@ https://github.com/jamesarosen/ember-i18n/wiki/Doc:-Defining-Translations
 and others ...
 
 
+  Initialize
+  ----------
+
+  Create an initializer for the i18n service:
+
+  ember g initializer i18n
+
+  Paste this into the initializer to inject the service into models, routes and controllers
+
+    export function initialize(/* container, application */) {
+      // application.inject('route', 'foo', 'service:foo');
+    }
+
+    export default {
+      name: 'i18n',
+
+      after: 'ember-i18n',
+
+      initialize: function(_, app) {
+        app.inject('model', 'i18n', 'service:i18n');
+        app.inject('route', 'i18n', 'service:i18n');
+        app.inject('controller', 'i18n', 'service:i18n');
+      }
+    };
+
+  Define initial Locale
+  ---------------------
+
+    1st define a default locale in the environment.js:
+
+      i18n: {
+        defaultLocale: 'es'
+      },
+
+    2nd initialize the Locale in the applicacion Route:
+
+      this.set('i18n.locale', navigator.language || navigator.userLanguage || 'es');
+
+    This can be done in any of the application Route hooks, assuring us that the navigator language will be checked and, in case it doesn't find any, we have a default defined to fall back to.
+
+  At this point, we will be able to access the i18n service in models, routes and controllers in the following way:
+
+    this.i18n .....
+
+    of
+
+    this.get('i18n') ....
+
+
+    ENJOY ;)
+
 
 
 GITHUB

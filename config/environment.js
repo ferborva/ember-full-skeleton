@@ -18,6 +18,9 @@ module.exports = function(environment) {
     torii: {
       sessionServiceName: 'session'
     },
+    i18n: {
+      defaultLocale: 'es'
+    },
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
