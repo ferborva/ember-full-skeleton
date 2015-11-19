@@ -3,6 +3,8 @@
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
+LOOK AT THE 'Tutorial.md' file to see the steps followed to get this scaffold layed out.
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
