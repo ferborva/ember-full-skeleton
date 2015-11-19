@@ -196,6 +196,18 @@ and others ...
       }
     };
 
+  Generate a new Locale
+  ---------------------
+
+    1st Run the following locale generator, specifying the language you want to target:
+
+      ember generate locale es
+
+      - Note that this generates two files: config and translations. Unless you have a very specific use case, take no notice of the config file.
+
+    2nd Extend the generated locale file with your translation strings.
+
+
   Define initial Locale
   ---------------------
 
@@ -219,6 +231,23 @@ and others ...
 
     this.get('i18n') ....
 
+
+  Usage
+  -----
+
+    In routes, models and controllers:
+
+      this.i18n .....
+
+      of
+
+      this.get('i18n') ....
+
+    In templates:
+
+      {{t ...}}
+
+    If in doubt, see the documentation.
 
     ENJOY ;)
 
