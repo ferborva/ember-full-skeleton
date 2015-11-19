@@ -1,11 +1,49 @@
+<nav>
+  <a href="#" class="brand-logo">Logo</a>
+  <ul class="right hide-on-med-and-down">
+    <li><a href="#!">First Sidebar Link</a></li>
+    <li><a href="#!">Second Sidebar Link</a></li>
+    <li>
+      {{#if session.isAuthenticated}}
+        <a {{action "signOut"}}>Sign out</a>
+      {{else}}
+        <a {{action "signIn" "github"}}>Github Login</a>
+      {{/if}}
+    </li>
+    <div class="right">
+      {{#if session.isAuthenticated}}
+        <small>Logged in as {{session.currentUser.displayName}} | </small>
+      {{/if}}
+    </div>
+  </ul>
+  <ul id="slide-out" class="side-nav">
+    <li><a href="#!">First Sidebar Link</a></li>
+    <li><a href="#!">Second Sidebar Link</a></li>
+    <li class="divider"></li>
+    <li>
+      {{#if session.isAuthenticated}}
+        <a {{action "signOut"}}>Sign out</a>
+        {{outlet}}
+      {{else}}
+        <a {{action "signIn" "github"}}>Github Login</a>
+      {{/if}}
+    </li>
+    <li class="divider"></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
+</nav>
+
 <h2 id="title">Welcome to Ember</h2>
 
 {{outlet}}
 
-{{#if session.isAuthenticated}}
-  Logged in as {{session.currentUser.displayName}}
-  <button {{action "signOut"}}>Sign out</button>
-  {{outlet}}
-{{else}}
-  <button {{action "signIn" "twitter"}}>Sign in with Twitter</button>
-{{/if}}
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".button-collapse").sideNav({
+      menuWidth: 220, // Default is 240
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: true // Closes side-nav on link clicks, useful for Angular/Meteor
+    });
+  });
+</script>

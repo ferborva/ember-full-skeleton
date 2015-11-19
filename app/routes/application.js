@@ -7,20 +7,25 @@ export default Ember.Route.extend({
 
     this.set('i18n.locale', navigator.language || navigator.userLanguage || 'es');
 
-    return this.get("session").fetch().catch(function() {});
+    // Initialize the datapoint
+    return this.Data.initialize().then(function(){
+      console.log('ALl is good');
+    }, function(error){
+      console.log('Problems I see young padawan.' + error.message);
+    }).catch(function(){
+      console.log('Something went wrong.');
+    });
 
   },
 
   actions: {
 
     signIn: function(provider) {
-      this.get("session").open("firebase", { provider: provider}).then(function(data) {
-        console.log(data.currentUser);
-      });
+      this.Data.signIn(provider);
     },
 
     signOut: function() {
-      this.get("session").close();
+      this.Data.signOut();
     }
   }
 });
