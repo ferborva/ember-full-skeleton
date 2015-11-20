@@ -44,3 +44,30 @@ STEPS
     d. Initialize the dataservice in applicationRoute beforeModel
 
     e. Pass the userSign in and signOUt methods to the datapoint service
+
+
+4º - ADD USER SECURITY RULES to firebase
+
+    {
+      "rules": {
+        "users": {
+          "$uid": {
+            ".read": "auth != null && auth.uid == $uid",
+            ".write": "auth != null && auth.uid == $uid"
+          }
+        },
+        "community":{
+          ".read": "root.child('users').child(auth.uid).exists()"
+        },
+        "public":{
+          ".read": "true",
+          ".write": "true"
+        }
+      }
+    }
+
+    These simple rules secure the 'users' node, only to be read or wrote by the owner of the node, 'community' node, only to be read by registered users, and the 'public' node, opendata point.
+
+5º - Included 'MINIMUM PROFILE' data save logic.
+    Upon entering the site or when login in, the saved user profile data will be checked:
+        if(user_data = empty) -> save the currentUser info.
