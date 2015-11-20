@@ -39,8 +39,8 @@ export default Ember.Service.extend({
           userUrl = self.get('firebase') + '/users/' + tempProvider + ':' + self.get('userId');
 
           self.set('userRef', new window.Firebase(userUrl));
-          self.minProfile();
-          // self.get('userRef').child('profile').set({name: 'tempUser'});
+          self.minProfileSave();
+
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log('User not logged in!');
@@ -51,14 +51,18 @@ export default Ember.Service.extend({
     return promise;
   },
 
+
+
+/*    GETTERS AND SETTERS   */
+
+  getFirebase: function(){
+    return this.get('firebase');
+  },
+
   setFirebase: function(appName){
     appName = 'https://' + appName + '.firebaseio.com';
     this.set('firebase', appName);
     this.initialize();
-  },
-
-  getFirebase: function(){
-    return this.get('firebase');
   },
 
   getBaseRef: function(){
@@ -68,6 +72,9 @@ export default Ember.Service.extend({
   getUserRef: function(){
     return this.get('userRef');
   },
+
+
+/*    SIGN IN AND OUT LOGIC*/
 
   signIn: function(provider){
     return this.get("session").open("firebase", { provider: provider}).then(function(data) {
@@ -80,7 +87,9 @@ export default Ember.Service.extend({
     this.get("session").close();
   },
 
-  minProfile: function(){
+
+/*    MINIMUM PROFILE FUNCTION. Checks if the user data stored in firebase is null */
+  minProfileSave: function(){
     var self = this;
     if(this.get('userRef') !== ''){
       this.get('userRef').child('profile').on("value", function(snapshot) {
