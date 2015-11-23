@@ -1,5 +1,8 @@
-<nav>
-  <a href="#" class="brand-logo">Logo</a>
+<nav class="blue darken-2">
+  <a href="#" class="brand-logo">
+    <img class="logo-image" src="/assets/img/fire-logo.png">
+    Flame Stack
+  </a>
   <ul class="right hide-on-med-and-down">
     <li><a href="#!">First Sidebar Link</a></li>
     <li><a href="#!">Second Sidebar Link</a></li>
@@ -10,11 +13,6 @@
         <a {{action "signIn" "github"}}>Github Login</a>
       {{/if}}
     </li>
-    <div class="right">
-      {{#if session.isAuthenticated}}
-        <small>Logged in as {{session.currentUser.displayName}} | </small>
-      {{/if}}
-    </div>
   </ul>
   <ul id="slide-out" class="side-nav">
     <li><a href="#!">First Sidebar Link</a></li>
@@ -23,7 +21,6 @@
     <li>
       {{#if session.isAuthenticated}}
         <a {{action "signOut"}}>Sign out</a>
-        {{outlet}}
       {{else}}
         <a {{action "signIn" "github"}}>Github Login</a>
       {{/if}}
@@ -33,9 +30,20 @@
   <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
 </nav>
 
-<h2 id="title">Welcome to Ember</h2>
+<div class="container">
+  <div class="right">
+    {{#if session.isAuthenticated}}
+      <br>
+      <div class="chip white-text blue darken-4">
+        <img src="{{session.currentUser.profileImageURL}}" alt="{{session.currentUser.displayName}}">
+      {{session.currentUser.displayName}}
+      </div>
+    {{/if}}
+  </div>
 
-{{outlet}}
+  {{outlet}}
+</div>
+
 
 
 <script type="text/javascript">
