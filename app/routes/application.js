@@ -9,11 +9,9 @@ export default Ember.Route.extend({
 
     // Initialize the datapoint
     return this.Data.initialize().then(function(){
-      console.log('ALl is good');
+      console.log('All is good');
     }, function(error){
       console.log('Problems I see young padawan.' + error.message);
-    }).catch(function(){
-      console.log('Something went wrong.');
     });
 
   },

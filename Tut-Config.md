@@ -82,4 +82,8 @@ STEPS
     Creating the service and intializing it. This will inject the toast service into the routes and controllers.
 
 
-7º - 
+7º - Firebase PRESENCE system. Register user presence (online).
+
+  Extend the datapoint service with a setupPresence method (called when initializing the app or when user Logs in).
+
+8º - 
