@@ -89,6 +89,7 @@ export default Ember.Service.extend({
   signOut: function(){
     var self = this;
     this.set('userRef', '');
+    this.set('userId', null);
     this.get("session").close().then(function(){
       self.toast.addToast(self.get('i18n').t('success.loggedOut'), 2000, 'rounded');
     }, null);
