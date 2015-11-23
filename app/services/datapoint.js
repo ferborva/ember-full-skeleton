@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Service.extend({
 
   session: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   firebase: 'https://cfmcom.firebaseio.com',
   baseRef: '',
@@ -40,10 +41,11 @@ export default Ember.Service.extend({
 
           self.set('userRef', new window.Firebase(userUrl));
           self.minProfileSave();
-
+          self.toast.addToast(self.get('i18n').t('success.logged'), 2000, 'rounded');
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log('User not logged in!');
+          self.toast.addToast(self.get('i18n').t('error.notLogged'), 2000, 'rounded');
           reject({message: 'No user logged in'});
         });
     });
@@ -79,12 +81,16 @@ export default Ember.Service.extend({
   signIn: function(provider){
     return this.get("session").open("firebase", { provider: provider}).then(function(data) {
       console.log(data.currentUser);
+      this.toast.addToast(this.get('i18n').t('success.logged'), 2000, 'rounded');
       this.minProfileSave();
     }.bind(this));
   },
 
   signOut: function(){
-    this.get("session").close();
+    var self = this;
+    this.get("session").close().then(function(){
+      self.toast.addToast(self.get('i18n').t('success.loggedOut'), 2000, 'rounded');
+    }, null);
   },
 
 
