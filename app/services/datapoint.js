@@ -79,7 +79,7 @@ export default Ember.Service.extend({
   signIn: function(provider){
     return this.get("session").open("firebase", { provider: provider}).then(function(data) {
       console.log(data.currentUser);
-      this.minProfile();
+      this.minProfileSave();
     }.bind(this));
   },
 
@@ -95,6 +95,7 @@ export default Ember.Service.extend({
       this.get('userRef').child('profile').on("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempUserData = self.get('session.currentUser');
+          tempUserData.provider = self.get('session.provider');
           self.get('userRef').child('profile').set(tempUserData);
         }
       });
