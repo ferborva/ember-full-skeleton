@@ -80,3 +80,6 @@ STEPS
     ember g intializer toast
 
     Creating the service and intializing it. This will inject the toast service into the routes and controllers.
+
+
+7º - 
