@@ -8,8 +8,12 @@ export default Ember.Service.extend({
   firebase: 'https://cfmcom.firebaseio.com',
   baseRef: '',
   userRef: '',
-  quizRef: '',
-  dataRef: '',
+  publicRef: '',
+  communityRef: '',
+  presenceRef: '',
+  presentUsersRef: '',
+  onlineRef: '',
+  onlineUsers: '',
   userId: null,
 
 
@@ -21,6 +25,8 @@ export default Ember.Service.extend({
 
       // Set baseRef
     this.set('baseRef', new window.Firebase(this.get('firebase')));
+    this.set('communityRef', new window.Firebase(this.get('firebase') + '/community'));
+    this.set('publicRef', new window.Firebase(this.get('firebase') + '/public'));
 
     var promise = new window.Promise(function(resolve, reject) {
 
@@ -36,16 +42,15 @@ export default Ember.Service.extend({
             self.set('userId', null);
           }
 
-
           userUrl = self.get('firebase') + '/users/' + tempProvider + ':' + self.get('userId');
 
           self.set('userRef', new window.Firebase(userUrl));
           self.minProfileSave();
-          self.toast.addToast(self.get('i18n').t('success.logged'), 2000, 'rounded');
+          self.toast.addToast(self.get('i18n').t('success.logged'), 2000);
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log('User not logged in!');
-          self.toast.addToast(self.get('i18n').t('error.notLogged'), 2000, 'rounded');
+          self.toast.addToast(self.get('i18n').t('error.notLogged'), 2000);
           reject({message: 'No user logged in'});
         });
     });
@@ -79,9 +84,8 @@ export default Ember.Service.extend({
 /*    SIGN IN AND OUT LOGIC*/
 
   signIn: function(provider){
-    return this.get("session").open("firebase", { provider: provider}).then(function(data) {
-      console.log(data.currentUser);
-      this.toast.addToast(this.get('i18n').t('success.logged'), 2000, 'rounded');
+    return this.get("session").open("firebase", { provider: provider}).then(function() {
+      this.toast.addToast(this.get('i18n').t('success.logged'), 2000);
       this.minProfileSave();
     }.bind(this));
   },
@@ -90,8 +94,9 @@ export default Ember.Service.extend({
     var self = this;
     this.set('userRef', '');
     this.set('userId', null);
+    this.get('presenceRef').set(null);
     this.get("session").close().then(function(){
-      self.toast.addToast(self.get('i18n').t('success.loggedOut'), 2000, 'rounded');
+      self.toast.addToast(self.get('i18n').t('success.loggedOut'), 2000);
     }, null);
   },
 
@@ -99,14 +104,33 @@ export default Ember.Service.extend({
 /*    MINIMUM PROFILE FUNCTION. Checks if the user data stored in firebase is null */
   minProfileSave: function(){
     var self = this;
-    if(this.get('userRef') !== ''){
-      this.get('userRef').child('profile').on("value", function(snapshot) {
+
+    function checkProfile(){
+      self.get('userRef').child('profile').on("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempUserData = self.get('session.currentUser');
           tempUserData.provider = self.get('session.provider');
           self.get('userRef').child('profile').set(tempUserData);
         }
       });
+    }
+
+    function checkUserConfig(){
+      self.get('userRef').child('config').on("value", function(snapshot) {
+        if (snapshot.val() === null) {
+          var tempConfigData = {
+            'notify': false,
+            'avatar': 'avatar-1'
+          };
+          self.get('userRef').child('config').set(tempConfigData);
+        }
+      });
+    }
+
+    if(this.get('userRef') !== ''){
+      checkProfile();
+      checkUserConfig();
+      this.setupPresence();
     } else {
       var tempProvider = self.get("session.provider");
 
@@ -116,19 +140,39 @@ export default Ember.Service.extend({
         self.set('userId', null);
       }
 
-
       var userUrl = self.get('firebase') + '/users/' + tempProvider + ':' + self.get('userId');
 
       self.set('userRef', new window.Firebase(userUrl));
-
-      this.get('userRef').child('profile').on("value", function(snapshot) {
-        if (snapshot.val() === null) {
-          var tempUserData = self.get('session.currentUser');
-          tempUserData.provider = self.get('session.provider');
-          self.get('userRef').child('profile').set(tempUserData);
-        }
-      });
+      checkProfile();
+      checkUserConfig();
+      self.setupPresence();
     }
+
+  },
+
+  setupPresence: function(){
+    var self = this;
+    this.set('onlineRef', new window.Firebase(this.get('firebase') + '/.info/connected'));
+    this.set('presenceRef', new window.Firebase(this.get('firebase') + '/presence/' + this.get('session.provider') + ':' + this.get('userId')));
+    this.set('presentUsersRef', new window.Firebase(this.get('firebase') + '/presence'));
+    this.get('onlineRef').on('value', function(snapshot) {
+      if (snapshot.val()) {
+        var tempUser = self.get('session.currentUser');
+        self.get('presenceRef').onDisconnect().remove();
+        self.get('presenceRef').set({
+          'name': tempUser.displayName,
+          'img' : tempUser.profileImageURL
+        });
+      }
+    });
+    this.get('presentUsersRef').on('value', function(snapshot){
+      if(snapshot.val()){
+        console.log(snapshot.val());
+        console.log('Online users changed!');
+        self.set('onlineUsers', snapshot.val());
+        localStorage.setItem("onlineUsers", JSON.stringify(snapshot.val()));
+      }
+    });
   }
 
 
