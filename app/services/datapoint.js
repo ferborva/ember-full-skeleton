@@ -88,6 +88,7 @@ export default Ember.Service.extend({
 
   signOut: function(){
     var self = this;
+    this.set('userRef', '');
     this.get("session").close().then(function(){
       self.toast.addToast(self.get('i18n').t('success.loggedOut'), 2000, 'rounded');
     }, null);
@@ -98,6 +99,27 @@ export default Ember.Service.extend({
   minProfileSave: function(){
     var self = this;
     if(this.get('userRef') !== ''){
+      this.get('userRef').child('profile').on("value", function(snapshot) {
+        if (snapshot.val() === null) {
+          var tempUserData = self.get('session.currentUser');
+          tempUserData.provider = self.get('session.provider');
+          self.get('userRef').child('profile').set(tempUserData);
+        }
+      });
+    } else {
+      var tempProvider = self.get("session.provider");
+
+      if (self.get('session.isAuthenticated')){
+        self.set('userId', self.get('session.currentUser.id'));
+      }else{
+        self.set('userId', null);
+      }
+
+
+      var userUrl = self.get('firebase') + '/users/' + tempProvider + ':' + self.get('userId');
+
+      self.set('userRef', new window.Firebase(userUrl));
+
       this.get('userRef').child('profile').on("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempUserData = self.get('session.currentUser');
