@@ -165,14 +165,10 @@ export default Ember.Service.extend({
         });
       }
     });
-    this.get('presentUsersRef').on('value', function(snapshot){
-      if(snapshot.val()){
-        console.log(snapshot.val());
-        console.log('Online users changed!');
-        self.set('onlineUsers', snapshot.val());
-        localStorage.setItem("onlineUsers", JSON.stringify(snapshot.val()));
-      }
-    });
+  },
+
+  getPresence: function(){
+    return this.get('presentUsersRef');
   }
 
 
