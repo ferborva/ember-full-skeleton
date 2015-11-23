@@ -6,5 +6,6 @@ export function initialize(container, application) {
 
 export default {
   name: 'datapoint',
+  after: ['toast', 'i18n'],
   initialize: initialize
 };
