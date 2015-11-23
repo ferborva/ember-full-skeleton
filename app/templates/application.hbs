@@ -1,5 +1,5 @@
 <nav class="blue darken-2">
-  <a href="#" class="brand-logo">
+  <a href="#" class="brand-logo thin">
     <img class="logo-image" src="/assets/img/fire-logo.png">
     Flame Stack
   </a>
@@ -31,15 +31,6 @@
 </nav>
 
 <div class="container">
-  <div class="right">
-    {{#if session.isAuthenticated}}
-      <br>
-      <div class="chip white-text blue darken-4">
-        <img src="{{session.currentUser.profileImageURL}}" alt="{{session.currentUser.displayName}}">
-      {{session.currentUser.displayName}}
-      </div>
-    {{/if}}
-  </div>
 
   {{outlet}}
 </div>
