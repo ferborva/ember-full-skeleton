@@ -8,7 +8,8 @@ Provider:     github
 top toolbar
   medium size and less: sidenav with toggle button + config initializer in application.hbs
 
-* User datapoint configuration and firebase user security rules
+User datapoint configuration and firebase user security rules
+
 * Basic user profile view and edit template
 * Basic news feed feature
 
@@ -71,3 +72,11 @@ STEPS
 5º - Included 'MINIMUM PROFILE' data save logic.
     Upon entering the site or when login in, the saved user profile data will be checked:
         if(user_data = empty) -> save the currentUser info.
+
+
+6º - Create the TOASTING Service!!!
+
+    ember g service toast
+    ember g intializer toast
+
+    Creating the service and intializing it. This will inject the toast service into the routes and controllers.

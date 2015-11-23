@@ -8,4 +8,12 @@ export default {
   // },
   //
   // "key.with.interpolation": "Text with {{anInterpolation}}"
+
+  "error": {
+    "notLogged": "User not logged in."
+  },
+  "success": {
+    "logged": "User correctly logged in.",
+    "loggedOut": "Sign out successful."
+  }
 };
