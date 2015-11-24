@@ -27,6 +27,7 @@ export default Ember.Service.extend({
     this.set('baseRef', new window.Firebase(this.get('firebase')));
     this.set('communityRef', new window.Firebase(this.get('firebase') + '/community'));
     this.set('publicRef', new window.Firebase(this.get('firebase') + '/public'));
+    this.set('presentUsersRef', new window.Firebase(this.get('firebase') + '/presence'));
 
     var promise = new window.Promise(function(resolve, reject) {
 
@@ -154,7 +155,6 @@ export default Ember.Service.extend({
     var self = this;
     this.set('onlineRef', new window.Firebase(this.get('firebase') + '/.info/connected'));
     this.set('presenceRef', new window.Firebase(this.get('firebase') + '/presence/' + this.get('session.provider') + ':' + this.get('userId')));
-    this.set('presentUsersRef', new window.Firebase(this.get('firebase') + '/presence'));
     this.get('onlineRef').on('value', function(snapshot) {
       if (snapshot.val()) {
         var tempUser = self.get('session.currentUser');
