@@ -8,8 +8,7 @@ export default Ember.Controller.extend({
   init: function(){
     var self = this;
     this._super.apply(this, arguments);
-    var dataUrl = new window.Firebase('https://cfmcom.firebaseio.com/presence');
-    dataUrl.on('value', function(snapshot){
+    this.Data.get('presentUsersRef').on('value', function(snapshot){
         var unsorted = snapshot.val();
         if (unsorted !== null) {
           var keys = Object.keys(unsorted);
