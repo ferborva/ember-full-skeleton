@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     this._super.apply(this, arguments);
     this.Data.get('presentUsersRef').on('value', function(snapshot){
         if (snapshot.val() !== null) {
-          var  = this.Data.objectToArray(snapshot.val());
+          var arrData = this.Data.objectToArray(snapshot.val());
           this.set('onlineUsers', arrData);
         } else {
           this.set('onlineUsers', '');

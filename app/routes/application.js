@@ -9,9 +9,9 @@ export default Ember.Route.extend({
 
     // Initialize the datapoint
     return this.Data.initialize(transition).then(function(){
-      console.log('All is good');
-    }, function(error){
-      console.log('Problems I see young padawan.' + error.message);
+      console.log('Your are ready to rock & roll!');
+    }, function(){
+      console.log('Your are ready to rock & roll! But log yourself in first');
     });
 
   },
