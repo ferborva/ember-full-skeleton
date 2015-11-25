@@ -32,11 +32,11 @@ export default Ember.Service.extend({
 
     var promise = new window.Promise(function(resolve, reject) {
 
-      self.get("session").fetch()
+      self.get('session').fetch()
         .then(function(){
           console.log('User session preserved.');
 
-          var tempProvider = self.get("session.provider");
+          var tempProvider = self.get('session.provider');
 
           if (self.get('session.isAuthenticated')){
             self.set('userId', self.get('session.currentUser.id'));
@@ -149,5 +149,18 @@ export default Ember.Service.extend({
         });
       }
     });
+  },
+
+
+  checkUser: function(){
+    var promise = new window.Promise(function(resolve, reject){
+      var status = this.get('session.isAuthenticated');
+      if(status){
+        resolve(true);
+      }
+      reject(false);
+    }.bind(this));
+
+    return promise;
   }
 });
