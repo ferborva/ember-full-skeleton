@@ -1,7 +1,7 @@
 export function initialize( container, application ) {
-  application.inject('route', 'toast', 'service:toast');
-  application.inject('controller', 'toast', 'service:toast');
-  application.inject('service:datapoint', 'toast', 'service:toast');
+  application.inject('route', 'Toast', 'service:toast');
+  application.inject('controller', 'Toast', 'service:toast');
+  application.inject('service:datapoint', 'Toast', 'service:toast');
 }
 
 export default {
