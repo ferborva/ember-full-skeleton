@@ -1,12 +1,20 @@
 <div class="row">
   <div class="col s12 offset-m6 m6 l4 offset-l8 right-align">
-    <h5>Users currently online</h5>
+    {{#unless onlineUsers}}
+      <h5>No users logged</h5>
+      <p>
+        Be the first one to set foot inside!
+      </p>
+    {{else}}
+      <h5>Users online</h5>
+      <div class="divider"></div>
+      <br>
+    {{/unless}}
       {{#each onlineUsers as |user|}}
-        <div class="chip white-text blue lighten-2">
+        <div class="chip white-text blue darken-3 bottom-pad bottom-marg">
           <img src="{{user.img}}" alt="{{user.name}}">
         {{user.name}}
         </div>
-        <br>
         <br>
       {{/each}}
   </div>
