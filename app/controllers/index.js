@@ -6,21 +6,14 @@ export default Ember.Controller.extend({
   Data: Ember.inject.service('datapoint'),
 
   init: function(){
-    var self = this;
     this._super.apply(this, arguments);
     this.Data.get('presentUsersRef').on('value', function(snapshot){
-        var unsorted = snapshot.val();
-        if (unsorted !== null) {
-          var keys = Object.keys(unsorted);
-          var items = [];
-          for (var j=0; j < keys.length; j++) {
-            items[j] = unsorted[keys[j]];
-            items[j].key = keys[j];
-          }
-          self.set('onlineUsers', items);
+        if (snapshot.val() !== null) {
+          var  = this.Data.objectToArray(snapshot.val());
+          this.set('onlineUsers', arrData);
         } else {
-          self.set('onlineUsers', '');
+          this.set('onlineUsers', '');
         }
-    });
+    }.bind(this));
   }
 });
