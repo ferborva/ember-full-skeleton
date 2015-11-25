@@ -19,7 +19,6 @@ export default Ember.Service.extend({
 
 
   initialize: function(transition){
-    console.log('DATAPOINT-SERVICE: Init()');
 
     var userUrl = '',
         self = this;
@@ -169,7 +168,7 @@ export default Ember.Service.extend({
     var keys = Object.keys(obj);
     var items = [];
     for (var j=0; j < keys.length; j++) {
-      items[j] = unsorted[keys[j]];
+      items[j] = obj[keys[j]];
       items[j].key = keys[j];
     }
     return items;
