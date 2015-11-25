@@ -162,5 +162,16 @@ export default Ember.Service.extend({
     }.bind(this));
 
     return promise;
+  },
+
+
+  objectToArray: function (obj) {
+    var keys = Object.keys(obj);
+    var items = [];
+    for (var j=0; j < keys.length; j++) {
+      items[j] = unsorted[keys[j]];
+      items[j].key = keys[j];
+    }
+    return items;
   }
 });
