@@ -15,9 +15,10 @@ export default Ember.Service.extend({
   onlineRef: '',
   onlineUsers: '',
   userId: null,
+  entryTransition: '',
 
 
-  initialize: function(){
+  initialize: function(transition){
     console.log('DATAPOINT-SERVICE: Init()');
 
     var userUrl = '',
@@ -51,7 +52,8 @@ export default Ember.Service.extend({
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log('User not logged in!');
-          self.toast.addToast(self.get('i18n').t('error.notLogged'), 2000);
+          self.set('entryTransition', transition);
+          self.toast.addToast(self.get('i18n').t('error.notLogged'), 3000);
           reject({message: 'No user logged in'});
         });
     });
@@ -60,34 +62,16 @@ export default Ember.Service.extend({
   },
 
 
-
-/*    GETTERS AND SETTERS   */
-
-  getFirebase: function(){
-    return this.get('firebase');
-  },
-
-  setFirebase: function(appName){
-    appName = 'https://' + appName + '.firebaseio.com';
-    this.set('firebase', appName);
-    this.initialize();
-  },
-
-  getBaseRef: function(){
-    return this.get('baseRef');
-  },
-
-  getUserRef: function(){
-    return this.get('userRef');
-  },
-
-
 /*    SIGN IN AND OUT LOGIC*/
 
   signIn: function(provider){
+    var self = this;
     return this.get("session").open("firebase", { provider: provider}).then(function() {
       this.toast.addToast(this.get('i18n').t('success.logged'), 2000);
       this.minProfileSave();
+      if(self.get('entryTransition')){
+        self.get('entryTransition').retry();
+      }
     }.bind(this));
   },
 
@@ -165,12 +149,5 @@ export default Ember.Service.extend({
         });
       }
     });
-  },
-
-  getPresence: function(){
-    return this.get('presentUsersRef');
   }
-
-
-
 });
