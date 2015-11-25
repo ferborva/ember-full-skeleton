@@ -48,12 +48,12 @@ export default Ember.Service.extend({
 
           self.set('userRef', new window.Firebase(userUrl));
           self.minProfileSave();
-          self.toast.addToast(self.get('i18n').t('success.logged'), 2000);
+          self.Toast.addToast(self.get('i18n').t('success.logged'), 2000);
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log('User not logged in!');
           self.set('entryTransition', transition);
-          self.toast.addToast(self.get('i18n').t('error.notLogged'), 3000);
+          self.Toast.addToast(self.get('i18n').t('error.notLogged'), 3000);
           reject({message: 'No user logged in'});
         });
     });
@@ -67,7 +67,7 @@ export default Ember.Service.extend({
   signIn: function(provider){
     var self = this;
     return this.get("session").open("firebase", { provider: provider}).then(function() {
-      this.toast.addToast(this.get('i18n').t('success.logged'), 2000);
+      this.Toast.addToast(this.get('i18n').t('success.logged'), 2000);
       this.minProfileSave();
       if(self.get('entryTransition')){
         self.get('entryTransition').retry();
@@ -81,7 +81,7 @@ export default Ember.Service.extend({
     this.set('userId', null);
     this.get('presenceRef').set(null);
     this.get("session").close().then(function(){
-      self.toast.addToast(self.get('i18n').t('success.loggedOut'), 2000);
+      self.Toast.addToast(self.get('i18n').t('success.loggedOut'), 2000);
     }, null);
   },
 
