@@ -1,42 +1,43 @@
-<nav class="blue darken-2">
-  <a href="#" class="brand-logo thin">
-    <div class="valign-wrapper">
-      <img class="logo-image" src="/assets/img/fire-logo.png">
-      <span class="hide-on-small-only">Flame Stack</span>
-      <span class="hide-on-med-and-up">Flame/St</span>
-    </div>
-  </a>
-  <ul class="right hide-on-med-and-down">
-    <li><a href="#!">First Sidebar Link</a></li>
-    <li><a href="#!">Second Sidebar Link</a></li>
-    <li>
-      {{#if session.isAuthenticated}}
-        <a {{action "signOut"}}>Sign out</a>
-      {{else}}
-        <a {{action "signIn" "github"}}>Github Login</a>
-      {{/if}}
-    </li>
-  </ul>
-  <ul id="slide-out" class="side-nav">
-    <li><a href="#!">First Sidebar Link</a></li>
-    <li><a href="#!">Second Sidebar Link</a></li>
-    <li class="divider"></li>
-    <li>
-      {{#if session.isAuthenticated}}
-        <a {{action "signOut"}}>Sign out</a>
-      {{else}}
-        <a {{action "signIn" "github"}}>Github Login</a>
-      {{/if}}
-    </li>
-    <li class="divider"></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
-</nav>
+<div class="navbar-fixed">
+  <nav class="blue darken-2">
+    <a href="#" class="brand-logo thin">
+      <div class="valign-wrapper">
+        <img class="logo-image" src="/assets/img/fire-logo.png">
+        <span class="hide-on-small-only">Flame Stack</span>
+        <span class="hide-on-med-and-up">Flame/St</span>
+      </div>
+    </a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#">First Sidebar Link</a></li>
+      <li><a href="#">Second Sidebar Link</a></li>
+      <li>
+        {{#if session.isAuthenticated}}
+          <a {{action "signOut"}}>Sign out</a>
+        {{else}}
+          <a {{action "signIn" "github"}}>Github Login</a>
+        {{/if}}
+      </li>
+    </ul>
+    <ul id="slide-out" class="side-nav">
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="divider"></li>
+      <li>
+        {{#if session.isAuthenticated}}
+          <a {{action "signOut"}}>Sign out</a>
+        {{else}}
+          <a {{action "signIn" "github"}}>Github Login</a>
+        {{/if}}
+      </li>
+      <li class="divider"></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
+  </nav>
+</div>
 
-<div class="container">
 
   {{outlet}}
-</div>
+
 
 
 
