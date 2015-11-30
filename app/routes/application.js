@@ -12,7 +12,8 @@ export default Ember.Route.extend({
       console.log('Your are ready to rock & roll!');
     }, function(){
       console.log('Your are ready to rock & roll! But log yourself in first');
-    });
+      this.transitionTo('login');
+    }.bind(this));
 
   },
 
