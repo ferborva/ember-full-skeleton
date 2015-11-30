@@ -12,8 +12,6 @@
     <li>
       {{#if session.isAuthenticated}}
         <a {{action "signOut"}}>Sign out</a>
-      {{else}}
-        <a {{action "signIn" "github"}}>Github Login</a>
       {{/if}}
     </li>
   </ul>
@@ -24,8 +22,6 @@
     <li>
       {{#if session.isAuthenticated}}
         <a {{action "signOut"}}>Sign out</a>
-      {{else}}
-        <a {{action "signIn" "github"}}>Github Login</a>
       {{/if}}
     </li>
     <li class="divider"></li>

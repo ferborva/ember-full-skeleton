@@ -15,5 +15,8 @@ export default {
   "success": {
     "logged": "Usuario registrado correctamente.",
     "loggedOut": "Cerrado de session correcto."
+  },
+  "login": {
+    "required": "Tienes que registrarte primero"
   }
 };

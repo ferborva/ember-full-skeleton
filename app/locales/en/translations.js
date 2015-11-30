@@ -15,5 +15,8 @@ export default {
   "success": {
     "logged": "User correctly logged in.",
     "loggedOut": "Sign out successful."
+  },
+  "login": {
+    "required": "You have to login first"
   }
 };
