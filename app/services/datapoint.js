@@ -82,6 +82,9 @@ export default Ember.Service.extend({
     this.get("session").close().then(function(){
       self.Toast.addToast(self.get('i18n').t('success.loggedOut'), 2000);
     }, null);
+
+    // optional - Redirect to Login on Logout
+    Fameskeleton.__container__.lookup('controller:index').transitionToRoute('login');
   },
 
 
