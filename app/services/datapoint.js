@@ -19,7 +19,6 @@ export default Ember.Service.extend({
 
 
   initialize: function(transition){
-    console.log(transition);
     var userUrl = '',
         self = this;
 
@@ -50,9 +49,7 @@ export default Ember.Service.extend({
           self.Toast.addToast(self.get('i18n').t('success.logged'), 2000);
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
-          console.log('User not logged in!');
           self.set('entryTransition', transition);
-          self.Toast.addToast(self.get('i18n').t('error.notLogged'), 3000);
           reject({message: 'No user logged in'});
         });
     });
