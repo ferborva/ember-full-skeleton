@@ -15,17 +15,25 @@
       {{/if}}
     </li>
   </ul>
-  <ul id="slide-out" class="side-nav">
-    <li><a href="#!">First Sidebar Link</a></li>
-    <li><a href="#!">Second Sidebar Link</a></li>
-    <li class="divider"></li>
-    <li>
+  <div id="slide-out" class="side-nav">
+    <div class="row">
+      <br>
+      <div class="center-align">
+        <img class="responsive-img" src="/assets/img/fire-logo.png">
+      </div>
+    </div>
+    <ul>
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li class="divider"></li>
       {{#if session.isAuthenticated}}
-        <a {{action "signOut"}}>Sign out</a>
+        <li>
+            <a {{action "signOut"}}>Sign out</a>
+        </li>
+        <li class="divider"></li>
       {{/if}}
-    </li>
-    <li class="divider"></li>
-  </ul>
+    </ul>
+  </div>
   <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
 </nav>
 
