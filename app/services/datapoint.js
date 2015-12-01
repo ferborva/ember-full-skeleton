@@ -19,7 +19,7 @@ export default Ember.Service.extend({
 
 
   initialize: function(transition){
-
+    console.log(transition);
     var userUrl = '',
         self = this;
 
