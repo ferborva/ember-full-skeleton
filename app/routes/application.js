@@ -11,7 +11,7 @@ export default Ember.Route.extend({
     return this.Data.initialize(transition).then(function(){
       console.log('Your are ready to rock & roll!');
     }, function(){
-      console.log('Your are ready to rock & roll! But log yourself in first');
+        // Abstract: catch error on datapoitn intialization
     });
 
   },
@@ -28,6 +28,8 @@ export default Ember.Route.extend({
 
     redirectHome: function(){
       this.transitionTo('index');
+      // Hide sideNav
+      $('.button-collapse').sideNav('hide');
     }
   }
 });
