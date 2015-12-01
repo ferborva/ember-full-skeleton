@@ -24,6 +24,10 @@ export default Ember.Route.extend({
 
     signOut: function() {
       this.Data.signOut();
+    },
+
+    redirectHome: function(){
+      this.transitionTo('index');
     }
   }
 });
