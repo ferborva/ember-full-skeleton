@@ -11,6 +11,18 @@ export default Ember.Route.extend({
       this.Toast.addToast(this.get('i18n').t('error.notLogged'), 3000);
       this.transitionTo('login');
     }.bind(this));
-  }
+  },
+
+  actions: {
+        didTransition: function() {
+            var route = this;
+            // Element does not exist.
+            Ember.run.scheduleOnce('afterRender', this, function() {
+                // If the models are already cached, the element exists.
+                this.Animate.go('.page', 'fadeInUpBig').then(function(){
+                }.bind(this));
+            });
+        }
+    }
 
 });
