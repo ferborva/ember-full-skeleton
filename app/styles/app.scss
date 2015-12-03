@@ -18,11 +18,28 @@
 
 // ANIMATIONS
 
-.page {
+.anim-slow{
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+.anim-normal{
   -moz-animation-duration: 0.4s;
+  -o-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.4s;
+  -ms-animation-duration: 0.4s;
   animation-duration: 0.4s;
-  // -vendor-animation-delay: 2s;
-  // -vendor-animation-iteration-count: infinite;
+}
+
+.anim-fast{
+  -moz-animation-duration: 0.2s;
+  -o-animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  -ms-animation-duration: 0.2s;
+  animation-duration: 0.2s;
 }
 
 
