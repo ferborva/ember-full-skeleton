@@ -47,6 +47,9 @@ export default Ember.Service.extend({
           self.set('userRef', new window.Firebase(userUrl));
           self.minProfileSave();
           self.Toast.addToast(self.get('i18n').t('success.logged'), 2000);
+          if(transition.params["login"]){
+            window.Fameskeleton.__container__.lookup('controller:index').transitionToRoute('index');
+          }
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log(transition);
