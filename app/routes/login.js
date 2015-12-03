@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     var promise = new Promise(function(resolve){
       setTimeout(function(){
         resolve();
-      }, 1000);
+      }, 2000);
     });
     return promise;
   },
