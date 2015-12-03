@@ -9,6 +9,7 @@ export default Ember.Route.extend({
     }, function(){
       this.Toast.addToast(this.get('i18n').t('error.notLogged'), 3000);
       this.transitionTo('login');
+      this.send('loading');
     }.bind(this));
   },
 
