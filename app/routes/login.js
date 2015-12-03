@@ -7,17 +7,13 @@ export default Ember.Route.extend({
   actions:{
 
     didTransition: function(){
-      $('#login-page').removeClass('hide');
-      Ember.run.scheduleOnce('afterRender', this, function() {
-          // If the models are already cached, the element exists.
-          this.Animate.go('.page', 'fadeInUpBig').then(function(){
-          }.bind(this));
-      });
+      window.$('#login-page').removeClass('hide');
+      this.Animate.entryPage('.page', 'fadeInUpBig');
     },
 
     willTransition: function(transition){
       if(!this.get('hasAnimated')){
-        transition.abort(); 
+        transition.abort();
         this.Animate.goAndHide('#login-page', 'flipOutX').then(function(){
           this.set('hasAnimated', true);
           transition.retry();
