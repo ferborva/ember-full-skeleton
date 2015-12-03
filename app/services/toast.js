@@ -8,7 +8,7 @@ export default Ember.Service.extend({
     c = c ? c : '';
     d = d ? d : null;
 
-    Materialize.toast(a,b,c,d);
+    window.Materialize.toast(a,b,c,d); 
   }
 
 });

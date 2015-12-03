@@ -81,7 +81,7 @@ export default Ember.Service.extend({
     }, null);
 
     // optional - Redirect to Login on Logout
-    Fameskeleton.__container__.lookup('controller:index').transitionToRoute('login');
+    window.Fameskeleton.__container__.lookup('controller:index').transitionToRoute('login');
   },
 
 
