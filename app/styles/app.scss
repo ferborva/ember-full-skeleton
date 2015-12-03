@@ -60,6 +60,9 @@
 }
 
 
+
+// NO PAGE FOUND
+
 .no-page-found{
   position: absolute;
   top: 0;
@@ -69,10 +72,20 @@
   background-image: url('/assets/img/404/bg.png');
 }
 
+.no-page-found .veil{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(13, 71, 161, 0.3);
+}
+
 .no-page-label{
   background-image: url('/assets/img/404/label.png');
-  z-index: 1000;
+  z-index: 10;
   position: relative;
   width:260px;
   height: 220px;
+  top: 50px;
 }
