@@ -49,7 +49,10 @@ export default Ember.Service.extend({
           self.Toast.addToast(self.get('i18n').t('success.logged'), 2000);
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
-          self.set('entryTransition', transition);
+          console.log(transition);
+          if(!transition.params["login"]){
+            self.set('entryTransition', transition);
+          }
           reject({message: 'No user logged in'});
         });
     });
@@ -67,6 +70,8 @@ export default Ember.Service.extend({
       this.minProfileSave();
       if(self.get('entryTransition')){
         self.get('entryTransition').retry();
+      }else{
+        window.Fameskeleton.__container__.lookup('controller:index').transitionToRoute('index');
       }
     }.bind(this));
   },
