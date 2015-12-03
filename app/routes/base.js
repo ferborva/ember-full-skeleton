@@ -6,8 +6,7 @@ export default Ember.Route.extend({
     // Check User
     return this.Data.checkUser(transition).then(function(){
       console.log('Your are ready to rock & roll!');
-    }, function(error){
-      console.log(error);
+    }, function(){
       this.Toast.addToast(this.get('i18n').t('error.notLogged'), 3000);
       this.transitionTo('login');
     }.bind(this));
@@ -15,7 +14,11 @@ export default Ember.Route.extend({
 
   actions: {
         didTransition: function() {
-          this.Animate.entryPage('.page', 'fadeInUpBig');
+          this.Animate.entryPage('.page', 'fadeInRightBig');
+        },
+
+        willTransition: function(transition){
+          this.Animate.exitPage('.page','fadeOutLeftBig', transition, 'slow');
         }
     }
 
