@@ -15,13 +15,7 @@ export default Ember.Route.extend({
 
   actions: {
         didTransition: function() {
-            var route = this;
-            // Element does not exist.
-            Ember.run.scheduleOnce('afterRender', this, function() {
-                // If the models are already cached, the element exists.
-                this.Animate.go('.page', 'fadeInUpBig').then(function(){
-                }.bind(this));
-            });
+          this.Animate.entryPage('.page', 'fadeInUpBig');
         }
     }
 
