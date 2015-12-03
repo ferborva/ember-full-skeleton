@@ -19,27 +19,27 @@
 // ANIMATIONS
 
 .anim-slow{
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  -webkit-animation-duration: 1s;
-  -ms-animation-duration: 1s;
-  animation-duration: 1s;
+  -moz-animation-duration: 0.8s;
+  -o-animation-duration: 0.8s;
+  -webkit-animation-duration: 0.8s;
+  -ms-animation-duration: 0.8s;
+  animation-duration: 0.8s;
 }
 
 .anim-normal{
+  -moz-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+}
+
+.anim-fast{
   -moz-animation-duration: 0.4s;
   -o-animation-duration: 0.4s;
   -webkit-animation-duration: 0.4s;
   -ms-animation-duration: 0.4s;
   animation-duration: 0.4s;
-}
-
-.anim-fast{
-  -moz-animation-duration: 0.2s;
-  -o-animation-duration: 0.2s;
-  -webkit-animation-duration: 0.2s;
-  -ms-animation-duration: 0.2s;
-  animation-duration: 0.2s;
 }
 
 

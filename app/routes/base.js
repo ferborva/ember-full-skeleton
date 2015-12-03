@@ -18,7 +18,7 @@ export default Ember.Route.extend({
         },
 
         willTransition: function(transition){
-          this.Animate.exitPage('.page','fadeOutLeftBig', transition, 'slow');
+          this.Animate.exitPage('.page','fadeOutRightBig', transition, 'fast');
         }
     }
 
