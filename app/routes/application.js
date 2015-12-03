@@ -10,6 +10,11 @@ export default Ember.Route.extend({
     // Initialize the datapoint
     return this.Data.initialize(transition).then(function(){
       console.log('Your are ready to rock & roll!');
+      console.log('-------------------------------');
+      console.log('-------------------------------');
+      console.log('"self" is defined but never used xD');
+      console.log('-------------------------------');
+      console.log('-------------------------------');
     }, function(){
         // Abstract: catch error on datapoitn intialization
     });

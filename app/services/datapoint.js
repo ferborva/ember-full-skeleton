@@ -4,6 +4,7 @@ export default Ember.Service.extend({
 
   session: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  routing: Ember.inject.service('-routing'),
 
   firebase: 'https://cfmcom.firebaseio.com',
   baseRef: '',
@@ -23,12 +24,12 @@ export default Ember.Service.extend({
         self = this;
 
       // Set baseRef
-    this.set('baseRef', new window.Firebase(this.get('firebase')));
-    this.set('communityRef', new window.Firebase(this.get('firebase') + '/community'));
-    this.set('publicRef', new window.Firebase(this.get('firebase') + '/public'));
-    this.set('presentUsersRef', new window.Firebase(this.get('firebase') + '/presence'));
+    this.set('baseRef', new Firebase(this.get('firebase')));
+    this.set('communityRef', new Firebase(this.get('firebase') + '/community'));
+    this.set('publicRef', new Firebase(this.get('firebase') + '/public'));
+    this.set('presentUsersRef', new Firebase(this.get('firebase') + '/presence'));
 
-    var promise = new window.Promise(function(resolve, reject) {
+    var promise = new Promise(function(resolve, reject) {
 
       self.get('session').fetch()
         .then(function(){
@@ -44,16 +45,16 @@ export default Ember.Service.extend({
 
           userUrl = self.get('firebase') + '/users/' + tempProvider + ':' + self.get('userId');
 
-          self.set('userRef', new window.Firebase(userUrl));
+          self.set('userRef', new Firebase(userUrl));
           self.minProfileSave();
           self.Toast.addToast(self.get('i18n').t('success.logged'), 2000);
-          if(transition.params["login"]){
-            window.Fameskeleton.__container__.lookup('controller:index').transitionToRoute('index');
+          if(transition.params['login']){
+            self.get('routing').transitionTo('index');
           }
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
           console.log(transition);
-          if(!transition.params["login"]){
+          if(!transition.params['login']){
             self.set('entryTransition', transition);
           }
           reject({message: 'No user logged in'});
@@ -67,14 +68,14 @@ export default Ember.Service.extend({
 /*    SIGN IN AND OUT LOGIC*/
 
   signIn: function(provider){
-    var self = this;
-    return this.get("session").open("firebase", { provider: provider}).then(function() {
+
+    return this.get('session').open('firebase', { provider: provider}).then(function() {
       this.Toast.addToast(this.get('i18n').t('success.logged'), 2000);
       this.minProfileSave();
-      if(self.get('entryTransition')){
-        self.get('entryTransition').retry();
+      if(this.get('entryTransition')){
+        this.get('entryTransition').retry();
       }else{
-        window.Fameskeleton.__container__.lookup('controller:index').transitionToRoute('index');
+        this.get('routing').transitionTo('index');
       }
     }.bind(this));
   },
@@ -84,12 +85,12 @@ export default Ember.Service.extend({
     this.set('userRef', '');
     this.set('userId', null);
     this.get('presenceRef').set(null);
-    this.get("session").close().then(function(){
+    this.get('session').close().then(function(){
       self.Toast.addToast(self.get('i18n').t('success.loggedOut'), 2000);
     }, null);
 
     // optional - Redirect to Login on Logout
-    window.Fameskeleton.__container__.lookup('controller:index').transitionToRoute('login');
+      this.get('routing').transitionTo('login');
   },
 
 
@@ -134,7 +135,7 @@ export default Ember.Service.extend({
 
       var userUrl = self.get('firebase') + '/users/' + tempProvider + ':' + self.get('userId');
 
-      self.set('userRef', new window.Firebase(userUrl));
+      self.set('userRef', new Firebase(userUrl));
       checkProfile();
       checkUserConfig();
       self.setupPresence();
@@ -144,8 +145,8 @@ export default Ember.Service.extend({
 
   setupPresence: function(){
     var self = this;
-    this.set('onlineRef', new window.Firebase(this.get('firebase') + '/.info/connected'));
-    this.set('presenceRef', new window.Firebase(this.get('firebase') + '/presence/' + this.get('session.provider') + ':' + this.get('userId')));
+    this.set('onlineRef', new Firebase(this.get('firebase') + '/.info/connected'));
+    this.set('presenceRef', new Firebase(this.get('firebase') + '/presence/' + this.get('session.provider') + ':' + this.get('userId')));
     this.get('onlineRef').on('value', function(snapshot) {
       if (snapshot.val()) {
         var tempUser = self.get('session.currentUser');
@@ -157,10 +158,10 @@ export default Ember.Service.extend({
       }
     });
   },
-
+  
 
   checkUser: function(){
-    var promise = new window.Promise(function(resolve, reject){
+    var promise = new Promise(function(resolve, reject){
       var status = this.get('session.isAuthenticated');
       if(status){
         resolve(true);

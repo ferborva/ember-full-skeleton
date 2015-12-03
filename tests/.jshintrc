@@ -21,7 +21,8 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "Materialize"
   ],
   "node": false,
   "browser": false,
@@ -48,5 +49,7 @@
   "white": false,
   "eqnull": true,
   "esnext": true,
-  "unused": true
+  "unused": true,
+  "Firebase": true,
+  "Promise": true
 }

@@ -4,11 +4,11 @@ export default Ember.Service.extend({
 
   go: function(node, animation){
 
-    var promise = new window.Promise(function(resolve) {
+    var promise = new Promise(function(resolve) {
       var animString = 'animated ' + animation;
-      window.$(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+      $(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
         function(){
-          window.$(node).removeClass(animString);
+          $(node).removeClass(animString);
           resolve('end');
         });
     });
@@ -18,11 +18,11 @@ export default Ember.Service.extend({
 
   goAndHide: function(node, animation){
 
-    var promise = new window.Promise(function(resolve) {
+    var promise = new Promise(function(resolve) {
       var animString = 'animated ' + animation;
-      window.$(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+      $(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
         function(){
-          window.$(node).addClass('hide').removeClass(animString);
+          $(node).addClass('hide').removeClass(animString);
           resolve('end');
         });
     });
@@ -32,19 +32,19 @@ export default Ember.Service.extend({
 
 
   entryPage: function(node, animation, speed){
-    window.$(node).removeClass('anim-normal anim-slow anim-fast');
-    var promise = new window.Promise(function(resolve) {
+    $(node).removeClass('anim-normal anim-slow anim-fast');
+    var promise = new Promise(function(resolve) {
       Ember.run.scheduleOnce('afterRender', this, function() {
         var animString = 'animated ' + animation;
         if (speed) {
           var animspeed = 'anim-' + speed;
-          window.$(node).addClass(animspeed);
+          $(node).addClass(animspeed);
         } else {
-          window.$(node).addClass('anim-normal');
+          $(node).addClass('anim-normal');
         }
-        window.$(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+        $(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
           function(){
-            window.$(node).removeClass(animString);
+            $(node).removeClass(animString);
             resolve('end');
           });
         });
@@ -55,14 +55,14 @@ export default Ember.Service.extend({
   pageTransitionComplete: false,
 
   exitPage: function(node, animation, transition, speed){
-    window.$(node).removeClass('anim-normal anim-slow anim-fast');
-    var promise = new window.Promise(function(resolve) {
+    $(node).removeClass('anim-normal anim-slow anim-fast');
+    var promise = new Promise(function(resolve) {
       if(!this.get('pageTransitionComplete')){
         if (speed) {
           var animspeed = 'anim-' + speed;
-          window.$(node).addClass(animspeed);
+          $(node).addClass(animspeed);
         } else {
-          window.$(node).addClass('anim-normal');
+          $(node).addClass('anim-normal');
         }
         transition.abort();
         this.goAndHide(node, animation).then(function(){
