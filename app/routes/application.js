@@ -16,7 +16,7 @@ export default Ember.Route.extend({
       console.log('-------------------------------');
       console.log('-------------------------------');
     }, function(){
-        // Abstract: catch error on datapoitn intialization
+        // Abstract: catch error on datapoint intialization
     });
 
   },

@@ -53,7 +53,6 @@ export default Ember.Service.extend({
           }
           resolve({message: 'Datapoint service correctly initialized.'});
         }, function(){
-          console.log(transition);
           if(!transition.params['login']){
             self.set('entryTransition', transition);
           }
