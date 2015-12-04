@@ -19,7 +19,9 @@ export default Ember.Route.extend({
         return true;
       }
 
+      // Call Data service checkUser method. True or false, depending on if user found.
       this.Data.checkUser().then(function(){
+        // Call the security check dataNode in Firebase and provide clearance te enter.
         this.Data.checkSecurityLevel(this.get('securityLevel')).then(function(){
           console.log('SecurityLevel Cleared');
           resolve('Security cleared');
