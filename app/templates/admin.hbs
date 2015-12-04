@@ -37,15 +37,19 @@
                       <span class="title">{{user.profile.displayName}}</span>
                       <br>
                       Security level: {{user.roleLevel}}
-                      <form {{action 'updateUserRole' user on="submit"}}>
-                        <p class="range-field">
-                          {{input type="range" min="0" max="3" value=user.roleLevel}}
-                          <button class="waves-effect waves-light btn green lighten-1" type="submit">
-                            <i class="material-icons right">done</i>
-                            {{t 'label.update'}}
-                          </button>
-                        </p>
-                      </form>
+                      <div class="row">
+                        <div class="col m6">
+                          <form {{action 'updateUserRole' user on="submit"}}>
+                            <p class="range-field">
+                              {{input type="range" min="0" max="3" value=user.roleLevel}}
+                              <button class="waves-effect waves-light btn green lighten-1" type="submit">
+                                <i class="material-icons right">done</i>
+                                {{t 'label.saveSecurity'}}
+                              </button>
+                            </p>
+                          </form>
+                        </div>
+                      </div>
                          <a class="secondary-content pointer" {{action 'toggleEdit' user}}>
                            <div class="valign-wrapper">
                              Edit <i class="material-icons">code</i>
@@ -90,5 +94,6 @@ $(document).ready(function(){
     $('.collapsible').collapsible({
       accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });
+
   });
 </script>
