@@ -18,5 +18,10 @@ export default {
   },
   "login": {
     "required": "You have to login first"
+  },
+  "label": {
+    "dataSaved": "Data saved correctly",
+    "save": "Save",
+    "update": "Update"
   }
 };

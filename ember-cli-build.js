@@ -20,6 +20,8 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('vendor/animate/animate.css');
+  app.import('vendor/noUiSlider/nouislider.css');
+  app.import('vendor/noUiSlider/nouislider.js');
 
   return app.toTree();
 };
