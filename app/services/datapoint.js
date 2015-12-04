@@ -158,7 +158,7 @@ export default Ember.Service.extend({
       }
     });
   },
-  
+
 
   checkUser: function(){
     var promise = new Promise(function(resolve, reject){
@@ -169,6 +169,23 @@ export default Ember.Service.extend({
       reject(false);
     }.bind(this));
 
+    return promise;
+  },
+
+  checkSecurityLevel: function(level){
+    var promise = new Promise(function(resolve, reject){
+      console.log('Page security level: ' + level);
+      this.get('baseRef').child('security').child('level' + level).once('value', function (snapshot) {
+        // code to handle new value
+        console.log(snapshot.val());
+        resolve('Access given');
+      }, function (err) {
+        // code to handle read error
+        console.log(err);
+        console.log('Security level not high enough.');
+        reject('Security not cleared');
+      });
+    }.bind(this));
     return promise;
   },
 
@@ -183,3 +200,16 @@ export default Ember.Service.extend({
     return items;
   }
 });
+
+
+
+/*
+
+PROMISE BASE
+------------
+
+var promise = new Promise(function(resolve, reject){
+
+});
+return promise;
+*/
