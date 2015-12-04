@@ -38,7 +38,6 @@ export default Ember.Controller.extend({
 
     toggleEdit: function(user){
       this.set('tempUser', user);
-      console.log(user);
       if(!user.editting){
         this.set('tempUser.editting', true);
       }else{
