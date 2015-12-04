@@ -22,6 +22,6 @@ export default {
   "label": {
     "dataSaved": "Data saved correctly",
     "save": "Save",
-    "update": "Update"
+    "saveSecurity": "Save Role"
   }
 };
