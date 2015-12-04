@@ -1,1 +1,37 @@
-{{outlet}}
+<div class="page">
+  <div class="container">
+    <div class="row">
+      <h1 class="center-align">Admin Zone</h1>
+    </div>
+    <div class="row">
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">filter_drama</i>User Requests</div>
+          <div class="collapsible-body">
+            <p>User Request Table!!!</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">vpn_key</i>Roles</div>
+          <div class="collapsible-body">
+            <p>User Roles administration table and form</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">contacts</i>Users</div>
+          <div class="collapsible-body">
+            <p>View Users data table</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+</script>

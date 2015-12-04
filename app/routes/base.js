@@ -25,6 +25,7 @@ export default Ember.Route.extend({
         this.Data.checkSecurityLevel(this.get('securityLevel')).then(function(){
           console.log('SecurityLevel Cleared');
           resolve('Security cleared');
+          return true;
         }, function(){
           console.log('User does not have clearance permission');
           resolve('Permission denied');

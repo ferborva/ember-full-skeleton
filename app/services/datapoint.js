@@ -80,13 +80,12 @@ export default Ember.Service.extend({
   },
 
   signOut: function(){
-    var self = this;
     this.set('userRef', '');
     this.set('userId', null);
     this.get('presenceRef').set(null);
     this.get('session').close().then(function(){
-      self.Toast.addToast(self.get('i18n').t('success.loggedOut'), 2000);
-    }, null);
+      this.Toast.addToast(this.get('i18n').t('success.loggedOut'), 2000);
+    }.bind(this), null);
 
     // optional - Redirect to Login on Logout
       this.get('routing').transitionTo('login');
@@ -173,14 +172,11 @@ export default Ember.Service.extend({
 
   checkSecurityLevel: function(level){
     var promise = new Promise(function(resolve, reject){
-      console.log('Page security level: ' + level);
       this.get('baseRef').child('security').child('level' + level).once('value', function (snapshot) {
         // code to handle new value
-        console.log(snapshot.val());
         resolve('Access given');
       }, function (err) {
         // code to handle read error
-        console.log(err);
         console.log('Security level not high enough.');
         reject('Security not cleared');
       });
