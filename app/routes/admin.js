@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import Base from './base';
 
-export default Ember.Route.extend({
+export default Base.extend({
+
+  auth: true,
+  securityLevel: 3
+
 });
