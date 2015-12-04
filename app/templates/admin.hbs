@@ -14,12 +14,30 @@
         <li>
           <div class="collapsible-header grey lighten-5"><i class="material-icons">vpn_key</i>Roles</div>
           <div class="collapsible-body">
-            <p>User Roles administration table and form</p>
+            <p class="flow-text">Roles have been thought of as security level passes. We defined 4 levels of user authentication and a fifth level for public access.</p>
           </div>
         </li>
         <li>
           <div class="collapsible-header grey lighten-5"><i class="material-icons">contacts</i>Users</div>
           <div class="collapsible-body">
+            <div class="container">
+              {{#unless onlineUsers}}
+                <h5>No users logged</h5>
+                <p>
+                  Be the first one to set foot inside!
+                </p>
+              {{else}}
+                <h5>Users online</h5>
+                <div class="divider"></div>
+                <br>
+              {{/unless}}
+                {{#each onlineUsers as |user|}}
+                  <div class="chip white-text blue darken-3 bottom-pad bottom-marg">
+                    <img src="{{user.img}}" alt="{{user.name}}">
+                  {{user.name}}
+                  </div>
+                {{/each}}
+            </div>
             <p>View Users data table</p>
           </div>
         </li>
