@@ -26,20 +26,32 @@
                     <img src="{{user.profile.profileImageURL}}" alt="{{user.profile.displayName}}" class="circle">
                     {{#if user.editting}}
                       <form {{action "updateDisplayName" user on="submit"}}>
-                          {{name}}
-                          {{input type="text" value=user.profile.displayName}}
+                          Display Name: {{input type="text" value=user.profile.displayName autofocus="true"}}<br>
+                          User Name: {{input type="text" value=user.profile.username}}
+                          <button class="waves-effect waves-light btn green lighten-1" type="submit">
+                            <i class="material-icons right">done</i>
+                            {{t 'label.save'}}
+                          </button>
                       </form>
                     {{else}}
                       <span class="title">{{user.profile.displayName}}</span>
+                      <br>
+                      Security level: {{user.roleLevel}}
+                      <form {{action 'updateUserRole' user on="submit"}}>
+                        <p class="range-field">
+                          {{input type="range" min="0" max="3" value=user.roleLevel}}
+                          <button class="waves-effect waves-light btn green lighten-1" type="submit">
+                            <i class="material-icons right">done</i>
+                            {{t 'label.update'}}
+                          </button>
+                        </p>
+                      </form>
+                         <a class="secondary-content pointer" {{action 'toggleEdit' user}}>
+                           <div class="valign-wrapper">
+                             Edit <i class="material-icons">code</i>
+                           </div>
+                         </a>
                     {{/if}}
-                    <p>
-                      Provider: {{user.profile.provider}}
-                    </p>
-                     <a class="secondary-content pointer" {{action 'toggleEdit' user}}>
-                       <div class="valign-wrapper">
-                         Edit <i class="material-icons">grade</i>
-                       </div>
-                     </a>
                   </li>
                 {{/each}}
               </ul>
