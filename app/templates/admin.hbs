@@ -24,11 +24,22 @@
                 {{#each existingUsers as |user|}}
                   <li class="collection-item avatar">
                     <img src="{{user.profile.profileImageURL}}" alt="{{user.profile.displayName}}" class="circle">
-                    <span class="title">{{user.profile.displayName}}</span>
+                    {{#if user.editting}}
+                      <form {{action "updateDisplayName" user on="submit"}}>
+                          {{name}}
+                          {{input type="text" value=user.profile.displayName}}
+                      </form>
+                    {{else}}
+                      <span class="title">{{user.profile.displayName}}</span>
+                    {{/if}}
                     <p>
                       Provider: {{user.profile.provider}}
                     </p>
-                    <a class="secondary-content pointer"><i class="material-icons">grade</i></a>
+                     <a class="secondary-content pointer" {{action 'toggleEdit' user}}>
+                       <div class="valign-wrapper">
+                         Edit <i class="material-icons">grade</i>
+                       </div>
+                     </a>
                   </li>
                 {{/each}}
               </ul>
