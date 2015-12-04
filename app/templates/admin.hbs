@@ -20,6 +20,23 @@
         <li>
           <div class="collapsible-header grey lighten-5"><i class="material-icons">contacts</i>Users</div>
           <div class="collapsible-body">
+              <ul class="collection">
+                {{#each existingUsers as |user|}}
+                  <li class="collection-item avatar">
+                    <img src="{{user.profile.profileImageURL}}" alt="{{user.profile.displayName}}" class="circle">
+                    <span class="title">{{user.profile.displayName}}</span>
+                    <p>
+                      Provider: {{user.profile.provider}}
+                    </p>
+                    <a class="secondary-content pointer"><i class="material-icons">grade</i></a>
+                  </li>
+                {{/each}}
+              </ul>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">swap_calls</i>Users Online</div>
+          <div class="collapsible-body">
             <div class="container">
               {{#unless onlineUsers}}
                 <h5>No users logged</h5>
@@ -38,7 +55,6 @@
                   </div>
                 {{/each}}
             </div>
-            <p>View Users data table</p>
           </div>
         </li>
       </ul>

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-
+existingUsers: '',
   model: function(){
     var promise = new Promise(function(resolve){
       setTimeout(function(){
