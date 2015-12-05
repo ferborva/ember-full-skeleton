@@ -35,6 +35,11 @@ export default Ember.Route.extend({
       this.transitionTo('index');
       // Hide sideNav
       $('.button-collapse').sideNav('hide');
+    },
+
+    setLocale: function (locale) {
+      this.set('i18n.locale', locale);
+      this.Toast.addToast(this.get('i18n').t('label.languageChange'), 2000);
     }
   }
 });

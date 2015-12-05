@@ -18,5 +18,16 @@ export default {
   },
   "login": {
     "required": "Tienes que registrarte primero"
+  },
+  "label": {
+    "dataSaved": "Datos guardados correctamente",
+    "save": "Guardar",
+    "saveSecurity": "Guardar Role",
+    "securityLevel": "Nivel de Acceso",
+    "languageChange": "El idioma ha sido cambiado a Español correctamente"
+  },
+  "lang": {
+    "english": "Inglés",
+    "spanish": "Español"
   }
 };
