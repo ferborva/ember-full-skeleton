@@ -14,7 +14,7 @@ module.exports = function(environment) {
       'media-src': "'self'",
       'frame-src': "'self' 'unsafe-inline' *"
     },
-    firebase: 'https://cfmcom.firebaseio.com/',
+    firebase: 'https://appcuentas.firebaseio.com/',
     torii: {
       sessionServiceName: 'session'
     },
