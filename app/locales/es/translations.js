@@ -24,10 +24,20 @@ export default {
     "save": "Guardar",
     "saveSecurity": "Guardar Role",
     "securityLevel": "Nivel de Acceso",
-    "languageChange": "El idioma ha sido cambiado a Español correctamente"
+    "languageChange": "El idioma ha sido cambiado a Español correctamente",
+    "edit": "Editar"
   },
   "lang": {
     "english": "Inglés",
     "spanish": "Español"
+  },
+  "admin": {
+    "zone": "Zona Admin",
+    "userRequests": "Peticiones de Usuario",
+    "roles": "Roles",
+    "users": "Usuarios",
+    "displayName": "Nombre a mostrar",
+    "userName": "Nombre de usuario",
+    "onlineUsers": "Usuarios Online"
   }
 };
