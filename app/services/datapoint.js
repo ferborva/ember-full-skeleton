@@ -178,8 +178,10 @@ export default Ember.Service.extend({
       }, function (err) {
         // code to handle read error
         console.log('Security level not high enough.');
+
+        this.Toast.addToast(this.get('i18n').t('security.notAllowed'), 2000, 'rounded');
         reject('Security not cleared');
-      });
+      }.bind(this));
     }.bind(this));
     return promise;
   },

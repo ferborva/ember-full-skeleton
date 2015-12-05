@@ -39,5 +39,8 @@ export default {
     "displayName": "Nombre a mostrar",
     "userName": "Nombre de usuario",
     "onlineUsers": "Usuarios Online"
+  },
+  "security": {
+    "notAllowed": "Tu usuario no tiene permisos para acceder a esta página"
   }
 };
