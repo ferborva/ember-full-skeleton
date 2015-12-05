@@ -1,7 +1,7 @@
 {
-  "name": "fameskeleton",
+  "name": "flamestack",
   "version": "0.0.0",
-  "description": "Small description for fameskeleton goes here",
+  "description": "Small description for flamestack goes here",
   "private": true,
   "directories": {
     "doc": "doc",
