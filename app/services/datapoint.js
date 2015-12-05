@@ -6,7 +6,7 @@ export default Ember.Service.extend({
   i18n: Ember.inject.service(),
   routing: Ember.inject.service('-routing'),
 
-  firebase: 'https://cfmcom.firebaseio.com',
+  firebase: 'https://appcuentas.firebaseio.com',
   baseRef: '',
   userRef: '',
   publicRef: '',

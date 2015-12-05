@@ -5,7 +5,7 @@ export default Ember.Route.extend({
   // BASE ROUTE PROPERTIES: Define the public configuration variables
 
   auth: false,
-  securityLevel: '0',
+  securityLevel: null,
 
 
 
@@ -21,8 +21,14 @@ export default Ember.Route.extend({
 
       // Call Data service checkUser method. True or false, depending on if user found.
       this.Data.checkUser().then(function(){
+        var level = this.get('securityLevel');
+        // If no security level is placed, the user will only be required to be logged in.
+        if(level === null){
+          resolve('Security cleared');
+          return true;
+        }
         // Call the security check dataNode in Firebase and provide clearance te enter.
-        this.Data.checkSecurityLevel(this.get('securityLevel')).then(function(){
+        this.Data.checkSecurityLevel(level).then(function(){
           console.log('SecurityLevel Cleared');
           resolve('Security cleared');
           return true;
