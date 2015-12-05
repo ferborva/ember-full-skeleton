@@ -28,6 +28,17 @@
                       <form {{action "updateDisplayName" user on="submit"}}>
                           Display Name: {{input type="text" value=user.profile.displayName autofocus="true"}}<br>
                           User Name: {{input type="text" value=user.profile.username}}
+                          <div class="row">
+                            <div class="col s3">
+                              {{t 'label.securityLevel'}}:<br>
+                              <b>{{role-level user.roleLevel}}</b>
+                            </div>
+                            <div class="col s9 m6">
+                                <p class="range-field">
+                                  {{input type="range" min="0" max="3" value=user.roleLevel}}
+                                </p>
+                            </div>
+                          </div>
                           <button class="waves-effect waves-light btn green lighten-1" type="submit">
                             <i class="material-icons right">done</i>
                             {{t 'label.save'}}
@@ -36,20 +47,8 @@
                     {{else}}
                       <span class="title">{{user.profile.displayName}}</span>
                       <br>
-                      Security level: {{user.roleLevel}}
-                      <div class="row">
-                        <div class="col m6">
-                          <form {{action 'updateUserRole' user on="submit"}}>
-                            <p class="range-field">
-                              {{input type="range" min="0" max="3" value=user.roleLevel}}
-                              <button class="waves-effect waves-light btn green lighten-1" type="submit">
-                                <i class="material-icons right">done</i>
-                                {{t 'label.saveSecurity'}}
-                              </button>
-                            </p>
-                          </form>
-                        </div>
-                      </div>
+                      Security level:
+                      <b>{{role-level user.roleLevel}}</b>
                          <a class="secondary-content pointer" {{action 'toggleEdit' user}}>
                            <div class="valign-wrapper">
                              Edit <i class="material-icons">code</i>
