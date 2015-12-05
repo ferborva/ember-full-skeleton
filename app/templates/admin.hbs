@@ -1,24 +1,24 @@
 <div class="page">
   <div class="container">
     <div class="row">
-      <h1 class="center-align">Admin Zone</h1>
+      <h1 class="center-align">{{t 'admin.zone'}}</h1>
     </div>
     <div class="row">
       <ul class="collapsible" data-collapsible="accordion">
         <li>
-          <div class="collapsible-header grey lighten-5"><i class="material-icons">filter_drama</i>User Requests</div>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">filter_drama</i>{{t 'admin.userRequests'}}</div>
           <div class="collapsible-body">
             <p>User Request Table!!!</p>
           </div>
         </li>
         <li>
-          <div class="collapsible-header grey lighten-5"><i class="material-icons">vpn_key</i>Roles</div>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">vpn_key</i>{{t 'admin.roles'}}</div>
           <div class="collapsible-body">
             <p class="flow-text">Roles have been thought of as security level passes. We defined 4 levels of user authentication and a fifth level for public access.</p>
           </div>
         </li>
         <li>
-          <div class="collapsible-header grey lighten-5"><i class="material-icons">contacts</i>Users</div>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">contacts</i>{{t 'admin.users'}}</div>
           <div class="collapsible-body">
               <ul class="collection">
                 {{#each existingUsers as |user|}}
@@ -26,8 +26,8 @@
                     <img src="{{user.profile.profileImageURL}}" alt="{{user.profile.displayName}}" class="circle">
                     {{#if user.editting}}
                       <form {{action "updateDisplayName" user on="submit"}}>
-                          Display Name: {{input type="text" value=user.profile.displayName autofocus="true"}}<br>
-                          User Name: {{input type="text" value=user.profile.username}}
+                          {{t 'admin.displayName'}}: {{input type="text" value=user.profile.displayName autofocus="true"}}<br>
+                          {{t 'admin.userName'}}: {{input type="text" value=user.profile.username}}
                           <div class="row">
                             <div class="col s3">
                               {{t 'label.securityLevel'}}:<br>
@@ -47,11 +47,11 @@
                     {{else}}
                       <span class="title">{{user.profile.displayName}}</span>
                       <br>
-                      Security level:
+                      {{t 'label.securityLevel'}}:
                       <b>{{role-level user.roleLevel}}</b>
                          <a class="secondary-content pointer" {{action 'toggleEdit' user}}>
                            <div class="valign-wrapper">
-                             Edit <i class="material-icons">code</i>
+                             {{t 'label.edit'}} <i class="material-icons">code</i>
                            </div>
                          </a>
                     {{/if}}
@@ -61,7 +61,7 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header grey lighten-5"><i class="material-icons">swap_calls</i>Users Online</div>
+          <div class="collapsible-header grey lighten-5"><i class="material-icons">swap_calls</i>{{t 'admin.onlineUsers'}}</div>
           <div class="collapsible-body">
             <div class="container">
               {{#unless onlineUsers}}

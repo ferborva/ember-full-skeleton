@@ -24,10 +24,20 @@ export default {
     "save": "Save",
     "saveSecurity": "Save Role",
     "securityLevel": "Security Level",
-    "languageChange": "The language has been successfully changed to English"
+    "languageChange": "The language has been successfully changed to English",
+    "edit": "Edit"
   },
   "lang": {
     "english": "English",
     "spanish": "Spanish"
+  },
+  "admin": {
+    "zone": "Admin Zone",
+    "userRequests": "User Requests",
+    "roles": "Roles",
+    "users": "Users",
+    "displayName": "Display Name",
+    "userName": "Username",
+    "onlineUsers": "Users Online"
   }
 };
