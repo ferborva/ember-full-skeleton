@@ -1,25 +1,4 @@
 <div id="index-page" class="page">
-  <!-- <div class="row">
-    <div class="col s12 offset-m6 m6 l4 offset-l8 right-align">
-      {{#unless onlineUsers}}
-        <h5>No users logged</h5>
-        <p>
-          Be the first one to set foot inside!
-        </p>
-      {{else}}
-        <h5>Users online</h5>
-        <div class="divider"></div>
-        <br>
-      {{/unless}}
-        {{#each onlineUsers as |user|}}
-          <div class="chip white-text blue darken-3 bottom-pad bottom-marg">
-            <img src="{{user.img}}" alt="{{user.name}}">
-          {{user.name}}
-          </div>
-          <br>
-        {{/each}}
-    </div>
-  </div> -->
 
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
@@ -27,6 +6,8 @@
       <h1 id="jumpTitle" class="header center blue-text text-darken-3" {{action 'focus' 'jumpTitle' 'bounce' 'slow'}}>Gestiona tus cuentas</h1>
       <div id="jumpRow" class="row center" {{action 'focus' 'jumpRow' 'swing' 'slow'}}>
         <h5 class="header col s12 light">Una moderna herramienta para gestionar tus gastos personales. Recibe informes detallados y un seguimiento completo de tus gastos de manera personalizada.</h5>
+        <br>
+        <h4>{{link-to 'Panel de usuario' 'user.dashboard'}}</h4>
       </div>
       <br><br>
 
@@ -37,7 +18,6 @@
   <div class="container">
     <div class="section">
 
-      <!--   Icon Section   -->
       <div class="row">
         <div id="pulseClick1" class="col s12 m4" {{action 'focus' 'pulseClick1' 'pulse' 'slow'}}>
           <div class="icon-block">

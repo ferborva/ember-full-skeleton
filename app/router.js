@@ -9,6 +9,10 @@ Router.map(function() {
   this.route('unknown', { path: "*path"});
   this.route('login');
   this.route('admin');
+
+  this.route('user', function() {
+    this.route('dashboard');
+  });
 });
 
 export default Router;
