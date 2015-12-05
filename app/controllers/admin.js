@@ -22,6 +22,7 @@ export default Ember.Controller.extend({
           var arrData = this.Data.objectToArray(snapshot.val());
           for (var i = 0; i < arrData.length; i++) {
             arrData[i].editting = false;
+            arrData[i].roleLevel = null;
           }
           this.set('existingUsers', arrData);
         } else {
@@ -53,13 +54,9 @@ export default Ember.Controller.extend({
   actions: {
     updateDisplayName: function(user){
       this.Data.get('baseRef').child('users').child(user.key).child('profile').set(user.profile);
+      this.Data.get('baseRef').child('roles').child(user.key).child('level').set(Number(user.roleLevel));
       this.set('tempUser', user);
       this.set('tempUser.editting', false);
-      this.Toast.addToast(this.get('i18n').t('label.dataSaved'), 2000);
-    },
-
-    updateUserRole: function(user){
-      this.Data.get('baseRef').child('roles').child(user.key).child('level').set(Number(user.roleLevel));
       this.Toast.addToast(this.get('i18n').t('label.dataSaved'), 2000);
     },
 

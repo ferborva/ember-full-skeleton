@@ -2,7 +2,7 @@ import Base from './base';
 
 export default Base.extend({
 
-  auth: false,
+  auth: true,
 
   actions: {
 
