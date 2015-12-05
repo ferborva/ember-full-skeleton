@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'fameskeleton',
+    modulePrefix: 'flamestack',
     environment: environment,
     contentSecurityPolicy: {
       'default-src': "'none'",
