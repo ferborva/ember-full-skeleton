@@ -7,6 +7,14 @@
         <span class="hide-on-med-and-up">Flame/St</span>
       </div>
     </div>
+    <i class="dropdown-button material-icons right lang-icon pointer" data-activates='dropdown1' style="
+    font-size: 40px;">language</i>
+      <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a {{action 'setLocale' 'en'}}>{{t 'lang.english'}}</a></li>
+        <li class="divider"></li>
+        <li><a {{action 'setLocale' 'es'}}>{{t 'lang.spanish'}}</a></li>
+      </ul>
     <ul class="right hide-on-med-and-down">
       <li><a href="#!">First Sidebar Link</a></li>
       <li><a href="#!">Second Sidebar Link</a></li>
@@ -42,10 +50,7 @@
 </div>
 
 
-
-
   {{outlet}}
-
 
 
 
@@ -56,5 +61,16 @@
       edge: 'right', // Choose the horizontal origin
       closeOnClick: true // Closes side-nav on link clicks, useful for Angular/Meteor
     });
+
+    $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: false, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: true, // Displays dropdown below the button
+        alignment: 'left' // Displays dropdown with edge aligned to the left of button
+      }
+    );
   });
 </script>

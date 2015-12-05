@@ -23,6 +23,11 @@ export default {
     "dataSaved": "Data saved correctly",
     "save": "Save",
     "saveSecurity": "Save Role",
-    "securityLevel": "Security Level"
+    "securityLevel": "Security Level",
+    "languageChange": "The language has been successfully changed to English"
+  },
+  "lang": {
+    "english": "English",
+    "spanish": "Spanish"
   }
 };
