@@ -2,9 +2,9 @@
   <nav class="blue darken-2">
     <div class="brand-logo thin">
       <div class="valign-wrapper" {{action 'redirectHome'}}>
-        <img class="logo-image" src="/assets/img/fire-logo.png">
-        <span class="hide-on-small-only">Flame Stack</span>
-        <span class="hide-on-med-and-up">Flame/St</span>
+        <img class="logo-image" src="/assets/img/cash-dark.png">
+        <span class="hide-on-small-only">Cash App</span>
+        <span class="hide-on-med-and-up">Cash</span>
       </div>
     </div>
     <i class="dropdown-button material-icons right lang-icon pointer" data-activates='dropdown1' style="
@@ -16,8 +16,6 @@
         <li><a class="blue-text text-darken-4" {{action 'setLocale' 'es'}}>{{t 'lang.spanish'}}</a></li>
       </ul>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#!">First Sidebar Link</a></li>
-      <li><a href="#!">Second Sidebar Link</a></li>
       <li>
         {{#if session.isAuthenticated}}
           <a {{action "signOut"}}>Sign out</a>
@@ -28,14 +26,10 @@
       <div class="row">
         <br>
         <div class="center-align">
-          <img class="responsive-img" src="/assets/img/fire-logo.png" {{action 'redirectHome'}}>
+          <img class="responsive-img" src="/assets/img/cash-dark.png" {{action 'redirectHome'}}>
         </div>
       </div>
       <ul>
-        <li><a href="#!">First Sidebar Link</a></li>
-        <li><a href="#!">Second Sidebar Link</a></li>
-        <li class="divider"></li>
-        <li>{{link-to 'Admin' 'admin'}}</li>
         <li class="divider"></li>
         {{#if session.isAuthenticated}}
           <li>
@@ -45,7 +39,7 @@
         {{/if}}
       </ul>
     </div>
-    <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
+    <a href="#" data-activates="slide-out" class="button-collapse left"><i class="right mdi-navigation-menu"></i></a>
   </nav>
 </div>
 
@@ -58,7 +52,7 @@
   $(document).ready(function(){
     $(".button-collapse").sideNav({
       menuWidth: 220, // Default is 240
-      edge: 'right', // Choose the horizontal origin
+      edge: 'left', // Choose the horizontal origin
       closeOnClick: true // Closes side-nav on link clicks, useful for Angular/Meteor
     });
 
