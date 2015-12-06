@@ -113,6 +113,8 @@ export default Ember.Service.extend({
             // Abstract for intial configuration
           };
           self.get('userRef').child('config').set(tempConfigData);
+          self.minConfigCategorias();
+          self.minConfigSistemas();
         }
       });
     }
@@ -191,6 +193,14 @@ export default Ember.Service.extend({
     loc.push({name: 'Regalos'});
     loc.push({name: 'Extras'});
     loc.push({name: 'Transporte'});
+  },
+
+  minConfigSistemas: function(){
+    var loc = this.get('userRef').child('config').child('sistemas');
+    loc.push({name: 'Cash'});
+    loc.push({name: 'Cuenta Principal'});
+    loc.push({name: 'Cuenta Secundaria'});
+    loc.push({name: 'Cuenta Extranjero'});
   },
 
 

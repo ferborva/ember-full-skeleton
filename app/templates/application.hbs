@@ -23,21 +23,21 @@
       </li>
     </ul>
     <div id="slide-out" class="side-nav">
-      <div class="row">
-        <br>
-        <div class="center-align">
-          <img class="responsive-img" src="/assets/img/cash-dark.png" {{action 'redirectHome'}}>
-        </div>
-      </div>
       <ul>
-        <li class="divider"></li>
         {{#if session.isAuthenticated}}
           <li>
               <a {{action "signOut"}}>Sign out</a>
           </li>
           <li class="divider"></li>
         {{/if}}
+        <li>{{link-to 'Nuevo Importe' 'user.gastos.nuevo'}}</li>
+        <li>{{link-to 'Configuracion' 'user.configuration'}}</li>
       </ul>
+      <div class="row">
+        <div class="center-align">
+          <img class="responsive-img" src="/assets/img/cash-dark.png" {{action 'redirectHome'}}>
+        </div>
+      </div>
     </div>
     <a href="#" data-activates="slide-out" class="button-collapse left"><i class="right mdi-navigation-menu"></i></a>
   </nav>

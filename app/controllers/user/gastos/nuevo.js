@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
 
   categorias: '',
 
-  sistemas: ['Cash', 'Cuenta 1', 'Cuenta Bankia', 'PayPal Berta'],
+  sistemas: '',
 
   init: function(){
       var currentTime = new Date();
@@ -30,6 +30,9 @@ export default Ember.Controller.extend({
 
       var catsLS = localStorage.getItem('categorias');
       this.set('categorias', JSON.parse(catsLS));
+
+      var sitsLS = localStorage.getItem('sistemas');
+      this.set('sistemas', JSON.parse(sitsLS));
   },
 
   actions: {

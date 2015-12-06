@@ -18,7 +18,6 @@ Router.map(function() {
     });
     this.route('configuration');
   });
-  this.route('user.configuration');
 });
 
 export default Router;

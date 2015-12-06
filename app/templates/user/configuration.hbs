@@ -31,6 +31,31 @@
         </form>
 
       </div>
+      <div class="col s12 m6 card center-align">
+        <span><h5 class="thin">Sistemas de pago</h5></span>
+
+        <div class="divider"></div>
+        <br>
+
+        {{#each configValues.sistemas as |sistema|}}
+          <div class="chip">
+            {{sistema.name}}
+            <i class="material-icons prefix" {{action 'borrarCategoria' categoria}}>close</i>
+          </div>
+        {{/each}}
+
+        <br>
+        <br>
+
+        <div class="divider"></div>
+        <form {{action 'nuevaCategoria' on="submit"}}>
+          <div class="input-field">
+            <i class="material-icons prefix">add</i>
+            {{input type="text" value=tempSist placeholder="Nuevo método de pago"}}
+          </div>
+        </form>
+
+      </div>
     </div>
 
 

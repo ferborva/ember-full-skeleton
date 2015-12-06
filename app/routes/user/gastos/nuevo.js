@@ -4,13 +4,19 @@ export default Base.extend({
   auth: true,
   model: function(){
     var promise = new Promise(function(resolve, reject){
-      this.Data.get('userRef').child('config').child('categorias').once('value', function(snap){
-        var data = this.Data.objectToArray(snap.val());
-        var arrData = [];
-        for (var i = 0; i < data.length; i++) {
-          arrData.push(data[i].name);
+      this.Data.get('userRef').child('config').once('value', function(snap){
+        var categorias = this.Data.objectToArray(snap.val().categorias);
+        var sistemas = this.Data.objectToArray(snap.val().sistemas);
+        var arrData1 = [];
+        var arrData2 = [];
+        for (var i = 0; i < categorias.length; i++) {
+          arrData1.push(categorias[i].name);
         }
-        localStorage.setItem('categorias', JSON.stringify(arrData));
+        for (var i = 0; i < sistemas.length; i++) {
+          arrData2.push(sistemas[i].name);
+        }
+        localStorage.setItem('categorias', JSON.stringify(arrData1));
+        localStorage.setItem('sistemas', JSON.stringify(arrData2));
         resolve();
       }.bind(this), function(err){
         console.log(err);
