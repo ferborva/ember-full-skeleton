@@ -14,12 +14,22 @@
   <!-- Fila 2 -->
   <div class="row" style="padding: 0; margin:0">
 
-    <div class="col s6 dash-block blue lighten-1 center-align">
-      Informes
+    <div id="dashInformesBlock" class="pointer col s6 dash-block blue lighten-1 center-align" {{action 'focus' 'dashInformesBlock' 'pulse' 'fast' on="mouseEnter"}}>
+      <div class="icon-block">
+        <h2 class="center indigo-text text-lighten-1"><i class="material-icons large">trending_up</i></h2>
+        <h5 class="center">Informes</h5>
+
+        <p class="light">Sacale partido al seguimiento de tus gastos.</p>
+      </div>
     </div>
 
-    <div class="col s6 dash-block blue lighten-2 center-align">
-      Buscar
+    <div id="dashBuscarBlock" class="pointer col s6 dash-block blue lighten-2 center-align" {{action 'focus' 'dashBuscarBlock' 'pulse' 'fast' on="mouseEnter"}}>
+      <div class="icon-block">
+        <h2 class="center indigo-text"><i class="material-icons large">search</i></h2>
+        <h5 class="center">Buscar</h5>
+
+        <p class="light">Filtra y encuentra ese escurridizo gasto 'perdido'.</p>
+      </div>
     </div>
 
   </div>
@@ -27,12 +37,22 @@
   <!-- Fila 3 -->
   <div class="row" style="padding: 0; margin:0">
 
-    <div class="col s6 dash-block blue darken-2 center-align">
-      Configuración
+    <div id="dashConfigBlock" class="pointer col s6 dash-block blue darken-2 center-align" {{action 'focus' 'dashConfigBlock' 'pulse' 'fast' on="mouseEnter"}}>
+      <div class="icon-block">
+        <h2 class="center indigo-text text-lighten-2"><i class="material-icons large">flash_on</i></h2>
+        <h5 class="center">Configuración</h5>
+
+        <p class="light">Personaliza tu cuenta</p>
+      </div>
     </div>
 
-    <div class="col s6 dash-block blue darken-1 center-align">
-      Calculadora
+    <div id="dashCalcBlock" class="pointer col s6 dash-block blue darken-1 center-align" {{action 'focus' 'dashCalcBlock' 'pulse' 'fast' on="mouseEnter"}}>
+      <div class="icon-block">
+        <h2 class="center indigo-text text-darken-1"><i class="material-icons large">group_work</i></h2>
+        <h5 class="center">Previsión</h5>
+
+        <p class="light">¿Cuentas a futuros? Mejor tener un mal plan que ninguno.</p>
+      </div>
     </div>
 
   </div>

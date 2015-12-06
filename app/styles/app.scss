@@ -1,6 +1,11 @@
 @import 'materialize';
 @import 'ember-cli-materialize';
 
+
+html,body{
+  overflow-x: hidden;
+}
+
 // Brand image - found in the toolbar
 .logo-image{
   width:50px;

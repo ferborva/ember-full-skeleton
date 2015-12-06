@@ -12,13 +12,11 @@
             {{view "select" content=sistemas value=gasto.sistema}}
             <label>Sistema de pago</label>
           </div>
-            <div class="input-field col s12 m6">
-              <i class="material-icons prefix">query_builder</i>
-              {{input type="date" class="datepicker" value=gasto.fecha placeholder="Fecha" required=true}}
-              <label class="active">Fecha</label>
-            </div>
-        </div>
-        <div class="row">
+          <div class="input-field col s12 m6">
+            <i class="material-icons prefix">query_builder</i>
+            {{input type="date" class="datepicker" value=gasto.fecha placeholder="Fecha" required=true}}
+            <label class="active">Fecha</label>
+          </div>
           <div class="input-field col s12 m6">
             <i class="material-icons prefix">dialpad</i>
             {{input value=gasto.importe placeholder="Importe" required=true}}
@@ -33,10 +31,20 @@
           </div>
         </div>
         <div class="row">
-          <button class="right waves-effect waves-light btn green lighten-1" type="submit">
-            <i class="material-icons right">done</i>
-            {{t 'label.save'}}
-          </button>
+          <div class="col s6">
+            {{#link-to 'user.dashboard'}}
+            <button class="full-width right waves-effect waves-light btn red lighten-1">
+              <i class="material-icons right">not_interested</i>
+              Cancelar
+            </button>
+            {{/link-to}}
+          </div>
+          <div class="col s6">
+            <button class="full-width right waves-effect waves-light btn green lighten-1" type="submit">
+              <i class="material-icons right">done</i>
+              {{t 'label.save'}}
+            </button>
+          </div>
         </div>
       </form>
     </div>
