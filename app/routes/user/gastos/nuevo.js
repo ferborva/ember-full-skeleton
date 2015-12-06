@@ -4,7 +4,7 @@ export default Base.extend({
   auth: true,
   model: function(){
     var promise = new Promise(function(resolve, reject){
-      this.Data.get('userRef').child('config').once('value', function(snap){
+      this.Data.get('userRef').child('config').on('value', function(snap){
         var categorias = this.Data.objectToArray(snap.val().categorias);
         var sistemas = this.Data.objectToArray(snap.val().sistemas);
         var arrData1 = [];

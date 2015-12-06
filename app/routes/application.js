@@ -55,6 +55,16 @@ export default Ember.Route.extend({
     focusHoverOut: function (id) {
       id = '#' + id;
       $(id).removeClass('block-focus-border');
+    },
+
+    formButtonIn: function (id) {
+      id = '#' + id;
+      $(id).addClass('z-depth-3');
+    },
+
+    formButtonOut: function (id) {
+      id = '#' + id;
+      $(id).removeClass('z-depth-3');
     }
   }
 });
