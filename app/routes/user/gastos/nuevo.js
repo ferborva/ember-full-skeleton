@@ -1,15 +1,15 @@
-import Base from './../base';
+import Base from './../../base';
 
 export default Base.extend({
   auth: true,
 
   actions: {
         didTransition: function() {
-          this.Animate.entryPage('.page', 'fadeIn', 'fast');
+          this.Animate.entryPage('.page', 'fadeInUpBig');
         },
 
         willTransition: function(transition){
-          this.Animate.exitPage('.page','fadeOut', transition, 'fast');
+          this.Animate.exitPage('.page','fadeOutDownBig', transition, 'fast');
         }
     }
 });
