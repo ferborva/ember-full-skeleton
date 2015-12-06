@@ -32,7 +32,7 @@ export default Ember.Route.extend({
     },
 
     redirectHome: function(){
-      this.transitionTo('index');
+      this.transitionTo('user.dashboard');
       // Hide sideNav
       $('.button-collapse').sideNav('hide');
     },
