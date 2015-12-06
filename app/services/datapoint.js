@@ -108,7 +108,8 @@ export default Ember.Service.extend({
 
     function checkUserConfig(){
       self.get('userRef').child('config').on("value", function(snapshot) {
-        if (snapshot.val() === null) {
+        var snapData = snapshot.val();
+        if (snapData === null) {
           var tempConfigData = {
             // Abstract for intial configuration
           };

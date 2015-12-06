@@ -11,14 +11,14 @@
 
         <div class="divider"></div>
         <br>
-
-        {{#each configValues.categorias as |categoria|}}
-          <div class="chip">
-            {{categoria.name}}
-            <i class="material-icons prefix" {{action 'borrarCategoria' categoria}}>close</i>
-          </div>
-        {{/each}}
-
+        <ul class="collection">
+          {{#each configValues.categorias as |categoria|}}
+            <li class="collection-item">
+              {{categoria.name}}
+              <i class="material-icons right" {{action 'borrarCategoria' categoria}}>close</i>
+            </li>
+          {{/each}}
+        </ul>
         <br>
         <br>
 
@@ -31,24 +31,26 @@
         </form>
 
       </div>
-      <div class="col s12 m6 card center-align">
+      <div class="col s12 push-m1 m5 card center-align">
         <span><h5 class="thin">Sistemas de pago</h5></span>
 
         <div class="divider"></div>
         <br>
 
-        {{#each configValues.sistemas as |sistema|}}
-          <div class="chip">
-            {{sistema.name}}
-            <i class="material-icons prefix" {{action 'borrarCategoria' categoria}}>close</i>
-          </div>
-        {{/each}}
+        <ul class="collection">
+          {{#each configValues.sistemas as |sistema|}}
+            <li class="collection-item">
+              {{sistema.name}}
+              <i class="material-icons right" {{action 'borrarSistema' sistema}}>close</i>
+            </li>
+          {{/each}}
+        </ul>
 
         <br>
         <br>
 
         <div class="divider"></div>
-        <form {{action 'nuevaCategoria' on="submit"}}>
+        <form {{action 'nuevoSistema' on="submit"}}>
           <div class="input-field">
             <i class="material-icons prefix">add</i>
             {{input type="text" value=tempSist placeholder="Nuevo método de pago"}}
