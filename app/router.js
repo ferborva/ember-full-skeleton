@@ -16,7 +16,9 @@ Router.map(function() {
     this.route('gastos', function() {
       this.route('nuevo');
     });
+    this.route('configuration');
   });
+  this.route('user.configuration');
 });
 
 export default Router;

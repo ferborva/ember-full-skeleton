@@ -83,6 +83,7 @@ html,body{
 
 
 
+
 // NO PAGE FOUND
 
 .no-page-found{
@@ -127,4 +128,11 @@ html,body{
 .dash-block{
   height: 250px;
   width: 100%;
+}
+
+
+// -- focus
+
+.block-focus-border{
+  border: 1px solid #bdbdbd;
 }
