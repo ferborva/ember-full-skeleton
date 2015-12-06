@@ -12,6 +12,10 @@ Router.map(function() {
 
   this.route('user', function() {
     this.route('dashboard');
+
+    this.route('gastos', function() {
+      this.route('nuevo');
+    });
   });
 });
 
