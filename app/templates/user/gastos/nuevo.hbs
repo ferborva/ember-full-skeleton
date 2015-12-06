@@ -2,6 +2,15 @@
   <br><h5 class="center-align thin">Nuevo Importe</h5><br>
   <div class="container">
     <div class="row">
+      <div class="col s8 push-s2 m6 push-m3">
+        <ul class="tabs">
+          <li class="tab col s3 pointer"><a class="active blue-text" {{action 'toggleType' 'gasto'}}>Gasto</a></li>
+          <li class="tab col s3 pointer"><a class="blue-text" {{action 'toggleType' 'ingreso'}}>Ingreso</a></li>
+          <div class="indicator blue" style="z-index:1"></div>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
       <form class="col s12" {{action "guardarGasto" on="submit"}}>
         <div class="row">
           <div class="input-field col s12 m6">
@@ -57,6 +66,7 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
+      $('ul.tabs').tabs();
       $('select').material_select();
   });
 

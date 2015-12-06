@@ -15,6 +15,8 @@ export default Ember.Controller.extend({
 
   sistemas: '',
 
+  type: 'gasto',
+
   init: function(){
       this._resetDate();
 
@@ -55,7 +57,11 @@ export default Ember.Controller.extend({
       this.set('gasto.fecha', tempDate);
 
       // Save
-      this.Data.get('userRef').child('datos').child('gastos').push(this.get('gasto'));
+      if(this.get('type') === 'gasto'){
+        this.Data.get('userRef').child('datos').child('gastos').push(this.get('gasto'));
+      }else{
+        this.Data.get('userRef').child('datos').child('ingresos').push(this.get('gasto'));
+      }
 
       // Reset
       this.set('gasto', {
@@ -70,6 +76,10 @@ export default Ember.Controller.extend({
       // Transition and toast
       this.transitionToRoute('user.dashboard');
       this.Toast.addToast('Gasto registrado', 1500);
+    },
+
+    toggleType: function(type){
+      this.set('type', type);
     }
   }
 });
