@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
       this.Data.get('userRef').child('config').child('sistemas').child(sistema.key).set(null);
     },
 
-    nuevaCategoria: function(){
+    nuevoSistema: function(){
       var nueva = this.get('tempSist');
       var nuevoSet = this.get('configValues.sistemas');
       this.Data.get('userRef').child('config').child('sistemas').push({name: nueva});
