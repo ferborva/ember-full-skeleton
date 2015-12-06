@@ -110,8 +110,7 @@ export default Ember.Service.extend({
       self.get('userRef').child('config').on("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempConfigData = {
-            'notify': false,
-            'avatar': 'avatar-1'
+            // Abstract for intial configuration
           };
           self.get('userRef').child('config').set(tempConfigData);
         }
@@ -184,6 +183,14 @@ export default Ember.Service.extend({
       }.bind(this));
     }.bind(this));
     return promise;
+  },
+
+  minConfigCategorias: function(){
+    var loc = this.get('userRef').child('config').child('categorias');
+    loc.push({name: 'Supermercado'});
+    loc.push({name: 'Regalos'});
+    loc.push({name: 'Extras'});
+    loc.push({name: 'Transporte'});
   },
 
 
