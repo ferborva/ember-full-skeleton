@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     fecha: ''
   },
 
-  categorias: ['Indefinida', 'Carrefour', 'Mercadona', 'Regalos', 'Extra'],
+  categorias: '',
 
   sistemas: ['Cash', 'Cuenta 1', 'Cuenta Bankia', 'PayPal Berta'],
 
@@ -27,6 +27,9 @@ export default Ember.Controller.extend({
       }
       var currentString = tempYear + '-' + tempMonth + '-' + tempDay;
       this.set('gasto.fecha', currentString);
+
+      var catsLS = localStorage.getItem('categorias');
+      this.set('categorias', JSON.parse(catsLS));
   },
 
   actions: {

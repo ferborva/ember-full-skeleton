@@ -1,3 +1,55 @@
 <div class="page">
-  configuration page
+  <div class="container">
+
+    <div class="row center-align">
+      <h4 class="thin">TU CONFIGURACIÓN</h4>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m6 card center-align">
+        <span><h5 class="thin">Categorias de gasto</h5></span>
+
+        <div class="divider"></div>
+        <br>
+
+        {{#each configValues.categorias as |categoria|}}
+          <div class="chip">
+            {{categoria.name}}
+            <i class="material-icons prefix" {{action 'borrarCategoria' categoria}}>close</i>
+          </div>
+        {{/each}}
+
+        <br>
+        <br>
+
+        <div class="divider"></div>
+        <form {{action 'nuevaCategoria' on="submit"}}>
+          <div class="input-field">
+            <i class="material-icons prefix">add</i>
+            {{input type="text" value=tempCat placeholder="Nueva categoría"}}
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+
+  </div>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
