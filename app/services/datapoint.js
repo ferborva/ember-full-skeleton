@@ -47,7 +47,7 @@ export default Ember.Service.extend({
 
           self.set('userRef', new Firebase(userUrl));
           self.minProfileSave();
-          self.Toast.addToast(self.get('i18n').t('success.logged'), 2000);
+          self.Toast.addToast(self.get('i18n').t('success.logged'), 1000);
           if(transition.params['login']){
             self.get('routing').transitionTo('index');
           }
