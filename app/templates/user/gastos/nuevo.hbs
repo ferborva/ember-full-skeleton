@@ -14,12 +14,12 @@
           </div>
           <div class="input-field col s12 m6">
             <i class="material-icons prefix">query_builder</i>
-            {{input type="date" class="datepicker" value=gasto.fecha placeholder="Fecha" required=true}}
+            {{input type="date" class="datepicker" value=tempFecha placeholder="Fecha" required=true}}
             <label class="active">Fecha</label>
           </div>
           <div class="input-field col s12 m6">
             <i class="material-icons prefix">dialpad</i>
-            {{input value=gasto.importe placeholder="Importe" required=true}}
+            {{input value=gasto.importe type="number" min="0.01" step="0.01" placeholder="Importe" required=true}}
             <label class="active">Importe</label>
           </div>
         </div>
@@ -52,7 +52,7 @@
 </div>
 <br>
 <br>
-<br> 
+<br>
 
 <script type="text/javascript">
 
