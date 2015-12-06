@@ -5,43 +5,83 @@ export default Base.extend({
 
   model: function(){
     var promise = new Promise(function(resolve, reject){
-      this.Data.get('userRef').child('datos').once('value', function(snap){
-        var fullData = snap.val();
-        if(fullData === null){
-          resolve({data: false});
-          return;
-        }
-        if(fullData.gastos){
-          var gastos = this.Data.objectToArray(fullData.gastos);
-        }else{
-          var gastos = null;
-        }
 
-        if(fullData.ingresos){
-          var ingresos = this.Data.objectToArray(fullData.ingresos);
-        }else{
-          var ingresos = null;
-        }
+      var currentDate = new Date();
+      console.log(currentDate);
+      var year = currentDate.getFullYear();
+      var month = currentDate.getMonth() + 1;
+      var tempString = year + '-' + month + '-01';
 
-        var totalGastos = 0,
-            totalIngresos = 0;
+      var firstDay = new Date(tempString);
+      var firstDayMillis = firstDay.getTime();
 
-        if(gastos){
-          for (var i = 0; i < gastos.length; i++) {
-            totalGastos += Number(gastos[i].importe);
+      var promiseGastos = new Promise(function(resolve){
+        this.Data.get('userRef')
+                .child('datos')
+                .child('gastos')
+                .orderByChild('fecha')
+                .startAt(firstDayMillis)
+                .once('value', function(snap){
+          var fullData = snap.val();
+          if(fullData === null){
+            resolve({data: false});
+            return;
           }
-        }
 
-        if(ingresos){
-          for (var i = 0; i < ingresos.length; i++) {
-            totalIngresos += ingresos[i].importe;
+          var gastos = this.Data.objectToArray(fullData);
+
+          var totalGastos = 0;
+
+          if(gastos){
+            for (var i = 0; i < gastos.length; i++) {
+              totalGastos += Number(gastos[i].importe);
+            }
           }
-        }
-        resolve({totalGastos: totalGastos, totalIngresos: totalIngresos});
-      }.bind(this), function(err){
-        console.log(err);
-        return false;
+          resolve({totalGastos: totalGastos});
+        }.bind(this), function(err){
+          console.log(err);
+          return false;
+        }.bind(this));
       }.bind(this));
+
+      var promiseIngresos = new Promise(function(resolve){
+        this.Data.get('userRef')
+                 .child('datos')
+                 .child('ingresos')
+                 .orderByChild('fecha')
+                 .startAt(firstDayMillis)
+                 .once('value', function(snap){
+          var fullData = snap.val();
+          if(fullData === null){
+            resolve({data: false});
+            return;
+          }
+
+          var ingresos = this.Data.objectToArray(fullData);
+
+          var totalIngresos = 0;
+
+          if(ingresos){
+            for (var i = 0; i < ingresos.length; i++) {
+              totalIngresos += Number(ingresos[i].importe);
+            }
+          }
+          resolve({totalIngresos: totalIngresos});
+        }.bind(this), function(err){
+          console.log(err);
+          return false;
+        }.bind(this));
+      }.bind(this));
+
+      Ember.RSVP.allSettled([promiseGastos, promiseIngresos]).then(function(data){
+        console.log(data);
+        var finalData = {totalGastos: data[0].value.totalGastos ? data[0].value.totalGastos : 0, totalIngresos: data[1].value.totalIngresos ? data[1].value.totalIngresos : 0};
+        resolve(finalData);
+      },function (err) {
+        console.log(err);
+        resolve();
+      })
+
     }.bind(this));
 
     return promise;
