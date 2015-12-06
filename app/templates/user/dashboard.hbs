@@ -6,9 +6,20 @@
 
     <div class="dash-block-top blue lighten-5 center-align">
       <div class="icon-block">
-        <h5 class="center"style="margin-top:0; padding-top: 20px">Resumen Primera vista</h5>
-
-        <p class="light">De un vistazo, tus gastos más recientes resumidos.</p>
+        {{#if model}}
+          <h4 class="center thin" style="margin-top:0; padding-top: 20px">Resumen Primera vista</h4>
+        {{else}}
+          <h4 class="center thin" style="margin-top:0; padding-top: 20px">No hay datos</h4>
+        {{/if}}
+        <div class="row">
+          <div class="col s6 right-align">
+            <h5>Gastos: <span>{{model.totalGastos}}</span> €</h5>
+          </div>
+          <div class="col s6 left-align">
+            <h5>Ingresos: <span>{{model.totalIngresos}}</span> €</h5>
+          </div>
+        </div>
+        <p class="light"><i>*Balance desde día 1 de este mes.</i></p>
       </div>
     </div>
 
