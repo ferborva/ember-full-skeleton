@@ -10,9 +10,12 @@ export default Ember.Controller.extend({
     fecha: ''
   },
 
+  categorias: ['Indefinida', 'Carrefour', 'Mercadona', 'Regalos', 'Extra'],
+
+  sistemas: ['Cash', 'Cuenta 1', 'Cuenta Bankia', 'PayPal Berta'],
+
   init: function(){
       var currentTime = new Date();
-      console.log(currentTime);
       var tempYear = currentTime.getFullYear();
       var tempMonth = currentTime.getMonth() + 1;
       if(tempMonth <10){
@@ -23,14 +26,8 @@ export default Ember.Controller.extend({
         tempDay = '0' + tempDay;
       }
       var currentString = tempYear + '-' + tempMonth + '-' + tempDay;
-      console.log(currentString);
       this.set('gasto.fecha', currentString);
   },
-
-
-  categorias: ['Indefinida', 'Carrefour', 'Mercadona', 'Regalos', 'Extra'],
-
-  sistemas: ['Cash', 'Cuenta 1', 'Cuenta Bankia', 'PayPal Berta'],
 
   actions: {
     guardarGasto: function(){
