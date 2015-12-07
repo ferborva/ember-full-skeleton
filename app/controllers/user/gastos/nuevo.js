@@ -7,7 +7,8 @@ export default Ember.Controller.extend({
     importe: '',
     descripcion: '',
     sistema: '',
-    fecha: ''
+    fecha: '',
+    ticket: ''
   },
   tempFecha: '',
 
@@ -22,6 +23,7 @@ export default Ember.Controller.extend({
 
       var catsLS = localStorage.getItem('categorias');
       this.set('categorias', JSON.parse(catsLS));
+      this.set('gasto.tipo', this.get('categorias')[0]);
 
       var sitsLS = localStorage.getItem('sistemas');
       this.set('sistemas', JSON.parse(sitsLS));
@@ -45,37 +47,83 @@ export default Ember.Controller.extend({
   actions: {
     guardarGasto: function(){
 
-      // Check Payment system
-      if(this.get('gasto.sistema') === ''){
-        this.set('gasto.sistema', 'Cash');
+      var file    = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
+
+      //When the file has been processed.
+      reader.onloadend = function () {
+
+        this.set('gasto.ticket', reader.result);
+
+        // Check Payment system
+        if(this.get('gasto.sistema') === ''){
+          this.set('gasto.sistema', 'Cash');
+        }
+
+        // Save Date
+        var tempDateString = this.get('tempFecha');
+        var tempDate = new Date(tempDateString);
+        tempDate = tempDate.getTime();
+        this.set('gasto.fecha', tempDate);
+
+        // Save
+        if(this.get('type') === 'gasto'){
+          this.Data.get('userRef').child('datos').child('gastos').push(this.get('gasto'));
+        }else{
+          this.Data.get('userRef').child('datos').child('ingresos').push(this.get('gasto'));
+        }
+
+        // Reset
+        this.set('gasto', {
+          tipo: '',
+          importe: '',
+          descripcion: '',
+          sistema: '',
+          fecha: ''
+        });
+        this._resetDate();
+
+        // Transition and toast
+        this.transitionToRoute('user.dashboard');
+        this.Toast.addToast('Gasto registrado', 1500);
+      }.bind(this);
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        // Check Payment system
+        if(this.get('gasto.sistema') === ''){
+          this.set('gasto.sistema', 'Cash');
+        }
+
+        // Save Date
+        var tempDateString = this.get('tempFecha');
+        var tempDate = new Date(tempDateString);
+        tempDate = tempDate.getTime();
+        this.set('gasto.fecha', tempDate);
+
+        // Save
+        if(this.get('type') === 'gasto'){
+          this.Data.get('userRef').child('datos').child('gastos').push(this.get('gasto'));
+        }else{
+          this.Data.get('userRef').child('datos').child('ingresos').push(this.get('gasto'));
+        }
+
+        // Reset
+        this.set('gasto', {
+          tipo: '',
+          importe: '',
+          descripcion: '',
+          sistema: '',
+          fecha: ''
+        });
+        this._resetDate();
+
+        // Transition and toast
+        this.transitionToRoute('user.dashboard');
+        this.Toast.addToast('Gasto registrado', 1500);
       }
 
-      // Save Date
-      var tempDateString = this.get('tempFecha');
-      var tempDate = new Date(tempDateString);
-      tempDate = tempDate.getTime();
-      this.set('gasto.fecha', tempDate);
-
-      // Save
-      if(this.get('type') === 'gasto'){
-        this.Data.get('userRef').child('datos').child('gastos').push(this.get('gasto'));
-      }else{
-        this.Data.get('userRef').child('datos').child('ingresos').push(this.get('gasto'));
-      }
-
-      // Reset
-      this.set('gasto', {
-        tipo: '',
-        importe: '',
-        descripcion: '',
-        sistema: '',
-        fecha: ''
-      });
-      this._resetDate();
-
-      // Transition and toast
-      this.transitionToRoute('user.dashboard');
-      this.Toast.addToast('Gasto registrado', 1500);
     },
 
     toggleType: function(type){
