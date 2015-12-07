@@ -40,6 +40,21 @@ export default Ember.Route.extend({
     setLocale: function (locale) {
       this.set('i18n.locale', locale);
       this.Toast.addToast(this.get('i18n').t('label.languageChange'), 2000);
+    },
+
+    focus: function(id, animation, speed){
+      id = '#' + id;
+      this.Animate.go(id,animation,speed);
+    },
+
+    focusHoverIn: function (id) {
+      id = '#' + id;
+      $(id).addClass('block-focus-border');
+    },
+
+    focusHoverOut: function (id) {
+      id = '#' + id;
+      $(id).removeClass('block-focus-border');
     }
   }
 });
