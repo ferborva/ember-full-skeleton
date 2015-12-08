@@ -17,6 +17,7 @@ Router.map(function() {
       this.route('nuevo');
     });
     this.route('configuration');
+    this.route('buscar');
   });
 });
 

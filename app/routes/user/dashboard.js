@@ -24,9 +24,21 @@ export default Base.extend({
                 .once('value', function(snap){
           var fullData = snap.val();
           if(fullData === null){
+            this.Data.get('userRef')
+                .child('datos')
+                .child('stats')
+                .child('numGastos')
+                .set(0);
+                console.log('hola');
             resolve({data: false});
             return;
           }
+
+          this.Data.get('userRef')
+              .child('datos')
+              .child('stats')
+              .child('numGastos')
+              .set(snap.numChildren());
 
           var gastos = this.Data.objectToArray(fullData);
 
