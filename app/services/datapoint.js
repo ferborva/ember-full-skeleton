@@ -228,6 +228,177 @@ export default Ember.Service.extend({
       items[j].key = keys[j];
     }
     return items;
+  },
+
+  // If reference null, defaults to baseRef.
+  openSocket: function (reference, childrenArray, dataKey) {
+
+    var promise = new Promise(function(resolve, reject){
+
+      //Check data function
+      function checkData(self, dataKey){
+        if(self.get(dataKey)){
+          return true;
+        }
+        return false;
+      };
+
+      //Get data switch FUNCTION
+      function getData(self, ref, childArray, childLen, key){
+        var promise = new Promise(function (resolve, reject) {
+          if(ref !== null){
+            switch(childLen){
+              case 0:
+                self.get(ref).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 1:
+                self.get(ref).child(childArray[0]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 2:
+                self.get(ref).child(childArray[0]).child(childArray[1]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 3:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 4:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 5:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 6:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).child(childArray[5]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+            }
+          }else{
+            switch(childLen){
+              case 0:
+                self.get(ref).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 1:
+                self.get(ref).child(childArray[0]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 2:
+                self.get(ref).child(childArray[0]).child(childArray[1]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 3:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 4:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 5:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+              case 6:
+                self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).child(childArray[5]).on('value',
+                  function(snap){
+                    self.set(key, snap.val());
+                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
+                  }.bind(self), function(errorObj){
+                    reject({error: errorObj});
+                  }.bind(self));
+                break;
+            }
+          };
+        });
+        return promise;
+      };
+
+      // Check if the dataKey has data
+      if(checkData(this, dataKey)){
+        resolve(this.get(dataKey));
+      }else{
+        // Children length
+        var childLength = childrenArray.length;
+        getData(this, reference, childrenArray, childLength, dataKey)
+            .then(function (dataGetResult) {
+                resolve(this.get(dataKey));
+            }.bind(this), function (dataGetResult) {
+              reject(dataGetResult.error);
+            }.bind(this));
+      }
+    }.bind(this));
+    return promise;
+
   }
 });
 
