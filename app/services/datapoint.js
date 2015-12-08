@@ -6,6 +6,22 @@ export default Ember.Service.extend({
   i18n: Ember.inject.service(),
   routing: Ember.inject.service('-routing'),
 
+
+  // DATA PROPERTIES ARE DEFINED HERE AS EMPTY STRINGS: ''
+
+  userData: {
+    profile: '',
+    securityLevel: '',
+    config: ''
+  },
+
+  appData: {
+    // DEFINE APP DATA HERE FOLLOWING THE SAME STRUCTURE FOUND IN USER DATA.
+
+  },
+
+
+  // Datapoint variables
   firebase: 'https://cfmcom.firebaseio.com',
   baseRef: '',
   userRef: '',
@@ -39,6 +55,8 @@ export default Ember.Service.extend({
 
           if (self.get('session.isAuthenticated')){
             self.set('userId', self.get('session.currentUser.id'));
+            self.set('userData.profile', self.get('session.currentUser'));
+            self.set('userData.profile.provider', tempProvider);
           }else{
             self.set('userId', null);
           }
@@ -80,6 +98,9 @@ export default Ember.Service.extend({
   },
 
   signOut: function(){
+    // Clear all data
+    this.set('userData', {});
+    this.set('appData', {});
     this.set('userRef', '');
     this.set('userId', null);
     this.get('presenceRef').set(null);
@@ -97,6 +118,9 @@ export default Ember.Service.extend({
     var self = this;
 
     function checkProfile(){
+      var tempProvider = self.get('session.provider');
+      self.set('userData.profile', self.get('session.currentUser'));
+      self.set('userData.profile.provider', tempProvider);
       self.get('userRef').child('profile').on("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempUserData = self.get('session.currentUser');
@@ -107,7 +131,7 @@ export default Ember.Service.extend({
     }
 
     function checkUserConfig(){
-      self.get('userRef').child('config').on("value", function(snapshot) {
+      self.get('userRef').child('config').once("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempConfigData = {
             'notify': false,
@@ -172,16 +196,24 @@ export default Ember.Service.extend({
 
   checkSecurityLevel: function(level){
     var promise = new Promise(function(resolve, reject){
-      this.get('baseRef').child('security').child('level' + level).once('value', function (snapshot) {
-        // code to handle new value
+      if(this.get('userData.securityLevel') && this.get('userData.securityLevel') == level){
         resolve('Access given');
-      }, function (err) {
-        // code to handle read error
-        console.log('Security level not high enough.');
-
-        this.Toast.addToast(this.get('i18n').t('security.notAllowed'), 2000, 'rounded');
+      }else if(this.get('userData.securityLevel') === 'No Access'){
         reject('Security not cleared');
-      }.bind(this));
+      }else{
+        this.get('baseRef').child('security').child('level' + level).once('value', function (snapshot) {
+          this.set('userData.securityLevel', level);
+          resolve('Access given');
+        }.bind(this), function (err) {
+          // code to handle read error
+          this.set('userData.securityLevel', 'No Access');
+          console.log('Security level not high enough.');
+
+          this.Toast.addToast(this.get('i18n').t('security.notAllowed'), 2000, 'rounded');
+          reject('Security not cleared');
+        }.bind(this));
+      }
+
     }.bind(this));
     return promise;
   },
