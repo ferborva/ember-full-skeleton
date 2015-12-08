@@ -1,4 +1,21 @@
+{{#if loading}}
+  <div class="row">
+    <div class="col s12 center-align">
+      <div class="loading-overlay">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <img src="/assets/loaders/477.GIF" height="80" width="80">
+      </div>
+    </div>
+  </div>
+{{/if}}
 <div class="page">
+
   <div class="row">
     <div class="col s8 push-s2 m6 push-m3">
       <ul class="tabs">
@@ -11,18 +28,22 @@
   <div class="row">
     <div class="col s12 m8 push-m2 center-align">
       <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">-</i>First</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">-</i>Second</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">-</i>Third</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
+        {{#each datosLista as |dato|}}
+          <li>
+            <div class="collapsible-header">
+              <i class="material-icons">
+                -
+              </i>
+              <span class="left">
+                {{dato.fecha}}
+              </span>
+              <span class="right">
+                {{dato.importe}} €
+              </span>
+            </div>
+            <div class="collapsible-body"><p>{{dato.descripcion}}</p></div>
+          </li>
+        {{/each}}
       </ul>
     </div>
   </div>
@@ -30,11 +51,11 @@
     <div class="col s12 center-align">
       <ul class="pagination">
         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active blue"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
+        {{#if gastos}}
+          {{#each paginasGastos as |pagina|}}
+            <li class={{if pagina.state 'active blue' 'waves-effect'}}><a href="#!"><span>{{pagina.page}}</span></a></li>
+          {{/each}}
+        {{/if}}
         <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
       </ul>
     </div>

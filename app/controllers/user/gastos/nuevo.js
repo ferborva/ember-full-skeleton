@@ -36,7 +36,7 @@ export default Ember.Controller.extend({
     if(tempMonth <10){
       tempMonth = '0' + tempMonth;
     }
-    var tempDay = currentTime.getDate()+1;
+    var tempDay = currentTime.getDate();
     if(tempDay < 10){
       tempDay = '0' + tempDay;
     }
@@ -55,6 +55,7 @@ export default Ember.Controller.extend({
       // Save Date
       var tempDateString = this.get('tempFecha');
       var tempDate = new Date(tempDateString);
+      console.log(tempDate);
       tempDate = tempDate.getTime();
       this.set('gasto.fecha', tempDate);
 
