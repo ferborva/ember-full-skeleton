@@ -52,8 +52,8 @@ export default Ember.Controller.extend({
   })),
 
   observeType: Ember.observer('gastos', function(){
-    this._getPages();
     this._getDatos();
+    this._getPages();
   }),
 
   _getPages: function () {
@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
           .child('stats')
           .on('value', function(snap){
             var values = snap.val();
-            if(values && values.numGastos > 0){
+            if(values && values.numGastos > 0 && this.get('gastos')){
               var tempNum = values.numGastos / this.get('itemsPerPage');
               tempNum = Math.ceil(tempNum);
 
@@ -88,12 +88,13 @@ export default Ember.Controller.extend({
               }
               this.set('paginasGastos', tempPaginas);
               resolve('Existed páginas de gastos');
-            }else{
+            }else if(this.get('gastos')){
               this.set('paginasGastos', [0]);
+              this.set('datosLista', []);
               resolve('No existen gastos');
             }
 
-            if(values && values.numIngresos > 0){
+            if(values && values.numIngresos > 0 && !this.get('gastos')){
               var tempNum = values.numIngresos / this.get('itemsPerPage');
               tempNum = Math.ceil(tempNum);
 
@@ -120,6 +121,7 @@ export default Ember.Controller.extend({
               resolve('Existed páginas de gastos');
             }else{
               this.set('paginasIngresos', [0]);
+              this.set('datosLista', []);
               resolve('No existen ingresos');
             }
           }.bind(this));
@@ -147,6 +149,8 @@ export default Ember.Controller.extend({
               arrData[i].fecha = tempString;
             }
             this.set('datosCompletos', arrData);
+          }else{
+            this.set('datosCompletos', []);
           }
           resolve('Datos encontrados');
         }.bind(this), function(err){
@@ -167,6 +171,8 @@ export default Ember.Controller.extend({
               arrData[i].fecha = tempString;
             }
             this.set('datosCompletos', arrData);
+          }else{
+            this.set('datosCompletos', []);
           }
           resolve('Datos encontrados');
         }.bind(this), function(err){
