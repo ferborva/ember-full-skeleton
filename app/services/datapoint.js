@@ -121,6 +121,7 @@ export default Ember.Service.extend({
       var tempProvider = self.get('session.provider');
       self.set('userData.profile', self.get('session.currentUser'));
       self.set('userData.profile.provider', tempProvider);
+      self.set('userData.securityLevel', '');
       self.get('userRef').child('profile').on("value", function(snapshot) {
         if (snapshot.val() === null) {
           var tempUserData = self.get('session.currentUser');
