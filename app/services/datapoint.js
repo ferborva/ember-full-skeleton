@@ -251,7 +251,9 @@ export default Ember.Service.extend({
               case 0:
                 self.get(ref).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -260,7 +262,9 @@ export default Ember.Service.extend({
               case 1:
                 self.get(ref).child(childArray[0]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -269,7 +273,9 @@ export default Ember.Service.extend({
               case 2:
                 self.get(ref).child(childArray[0]).child(childArray[1]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -278,7 +284,9 @@ export default Ember.Service.extend({
               case 3:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -287,7 +295,9 @@ export default Ember.Service.extend({
               case 4:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -296,7 +306,9 @@ export default Ember.Service.extend({
               case 5:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -305,7 +317,9 @@ export default Ember.Service.extend({
               case 6:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).child(childArray[5]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -317,7 +331,9 @@ export default Ember.Service.extend({
               case 0:
                 self.get(ref).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -326,7 +342,9 @@ export default Ember.Service.extend({
               case 1:
                 self.get(ref).child(childArray[0]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -335,7 +353,9 @@ export default Ember.Service.extend({
               case 2:
                 self.get(ref).child(childArray[0]).child(childArray[1]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -344,7 +364,9 @@ export default Ember.Service.extend({
               case 3:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -353,7 +375,9 @@ export default Ember.Service.extend({
               case 4:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -362,7 +386,9 @@ export default Ember.Service.extend({
               case 5:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
@@ -371,7 +397,9 @@ export default Ember.Service.extend({
               case 6:
                 self.get(ref).child(childArray[0]).child(childArray[1]).child(childArray[2]).child(childArray[3]).child(childArray[4]).child(childArray[5]).on('value',
                   function(snap){
-                    self.set(key, snap.val());
+                    var values = snap.val();
+                    var arrData = self.objectToArray(values);
+                    self.set(key, arrData);
                     resolve({message: 'Data downloaded and saved to Datapoint property: ' + key});
                   }.bind(self), function(errorObj){
                     reject({error: errorObj});
