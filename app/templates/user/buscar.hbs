@@ -1,0 +1,51 @@
+<div class="page">
+  <div class="row">
+    <div class="col s8 push-s2 m6 push-m3">
+      <ul class="tabs">
+        <li class="tab col s3 pointer"><a class="active blue-text" {{action 'toggleType' 'gasto'}}>Gastos</a></li>
+        <li class="tab col s3 pointer"><a class="blue-text" {{action 'toggleType' 'ingreso'}}>Ingresos</a></li>
+        <div class="indicator blue" style="z-index:1"></div>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m8 push-m2 center-align">
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">-</i>First</div>
+          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">-</i>Second</div>
+          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">-</i>Third</div>
+          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 center-align">
+      <ul class="pagination">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active blue"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('ul.tabs').tabs();
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+</script>

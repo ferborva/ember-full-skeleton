@@ -40,16 +40,18 @@
       </div>
     </div>
 
-    <div id="dashBuscarBlock" class="pointer col s6 dash-block blue lighten-2 center-align"
-          {{action 'focusHoverIn' 'dashBuscarBlock' on="mouseEnter"}}
-          {{action 'focusHoverOut' 'dashBuscarBlock' on="mouseLeave"}}>
-      <div class="icon-block">
-        <h2 class="center indigo-text"><i class="material-icons large">search</i></h2>
-        <h5 class="center">Buscar</h5>
+    {{#link-to 'user.buscar' class="black-text"}}
+      <div id="dashBuscarBlock" class="pointer col s6 dash-block blue lighten-2 center-align"
+            {{action 'focusHoverIn' 'dashBuscarBlock' on="mouseEnter"}}
+            {{action 'focusHoverOut' 'dashBuscarBlock' on="mouseLeave"}}>
+        <div class="icon-block">
+          <h2 class="center indigo-text"><i class="material-icons large">search</i></h2>
+          <h5 class="center">Buscar</h5>
 
-        <p class="light">Filtra y encuentra ese escurridizo gasto 'perdido'.</p>
+          <p class="light">Filtra y encuentra ese escurridizo gasto 'perdido'.</p>
+        </div>
       </div>
-    </div>
+    {{/link-to}}
 
   </div>
 
