@@ -7,7 +7,6 @@ export default Base.extend({
     var promise = new Promise(function(resolve, reject){
 
       var currentDate = new Date();
-      console.log(currentDate);
       var year = currentDate.getFullYear();
       var month = currentDate.getMonth() + 1;
       var tempString = year + '-' + month + '-01';
@@ -29,16 +28,24 @@ export default Base.extend({
                 .child('stats')
                 .child('numGastos')
                 .set(0);
-                console.log('hola');
             resolve({data: false});
             return;
           }
 
+          // Update record stats
+
           this.Data.get('userRef')
-              .child('datos')
-              .child('stats')
-              .child('numGastos')
-              .set(snap.numChildren());
+                  .child('datos')
+                  .child('gastos')
+                  .once('value', function(snap){
+                    this.Data.get('userRef')
+                        .child('datos')
+                        .child('stats')
+                        .child('numGastos')
+                        .set(snap.numChildren());
+                  }.bind(this));
+
+
 
           var gastos = this.Data.objectToArray(fullData);
 
@@ -69,6 +76,19 @@ export default Base.extend({
             return;
           }
 
+          // Update record stats
+
+          this.Data.get('userRef')
+                  .child('datos')
+                  .child('ingresos')
+                  .once('value', function(snap){
+                    this.Data.get('userRef')
+                        .child('datos')
+                        .child('stats')
+                        .child('numIngresos')
+                        .set(snap.numChildren());
+                  }.bind(this));
+
           var ingresos = this.Data.objectToArray(fullData);
 
           var totalIngresos = 0;
@@ -86,7 +106,6 @@ export default Base.extend({
       }.bind(this));
 
       Ember.RSVP.allSettled([promiseGastos, promiseIngresos]).then(function(data){
-        console.log(data);
         var finalData = {totalGastos: data[0].value.totalGastos ? data[0].value.totalGastos : 0, totalIngresos: data[1].value.totalIngresos ? data[1].value.totalIngresos : 0};
         resolve(finalData);
       },function (err) {
