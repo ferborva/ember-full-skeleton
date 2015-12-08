@@ -15,7 +15,11 @@
   </div>
 {{/if}}
 <div class="page">
-
+  <div class="row">
+    <div class="col s12 center-align">
+      <h4 class="thin">Datos de los útimos 30 días</h4>
+    </div>
+  </div>
   <div class="row">
     <div class="col s8 push-s2 m6 push-m3">
       <ul class="tabs">
@@ -50,13 +54,17 @@
   <div class="row">
     <div class="col s12 center-align">
       <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        {{#if showBack}}
+          <li class="waves-effect"><a {{action 'pageDown'}}><i class="material-icons">chevron_left</i></a></li>
+        {{/if}}
         {{#if gastos}}
           {{#each paginasGastos as |pagina|}}
-            <li class={{if pagina.state 'active blue' 'waves-effect'}}><a href="#!"><span>{{pagina.page}}</span></a></li>
+            <li class={{if pagina.state 'active blue' 'waves-effect'}}><a {{action 'pageChange' pagina.page}}><span>{{pagina.page}}</span></a></li>
           {{/each}}
         {{/if}}
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        {{#if showForward}}
+          <li class="waves-effect"><a {{action 'pageUp'}}><i class="material-icons">chevron_right</i></a></li>
+        {{/if}}
       </ul>
     </div>
   </div>

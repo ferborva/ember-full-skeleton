@@ -4,9 +4,14 @@ export default Ember.Controller.extend({
 
   loading: false,
   paginasGastos: '',
-  paginasIngresos: [],
+  paginasIngresos: '',
   itemsPerPage: 10,
+  currentPage: 1,
+  currentTotal: 1,
+  showBack: false,
+  showForward: true,
   gastos: true,
+  datosCompletos: '',
   datosLista: '',
 
   init: function(){
@@ -20,6 +25,37 @@ export default Ember.Controller.extend({
 
   },
 
+  observePage: Ember.on('init', Ember.observer('currentPage', 'currentTotal', 'datosCompletos', function(){
+    var perPage = this.get('itemsPerPage');
+    var total = this.get('currentTotal');
+    var page = this.get('currentPage');
+    var cutList = this.get('datosCompletos');
+    cutList = cutList.slice((page-1)*perPage, page*perPage);
+    this.set('datosLista', cutList);
+    if(total <= 1){
+      this.set('currentPage', 1);
+      this.set('showBack', false);
+      this.set('showForward', false);
+    }else{
+      if(page !== total){
+        this.set('showForward', true);
+      } else if (page === total){
+        this.set('showForward', false);
+      }
+      if(page > 1){
+        this.set('showBack', true);
+      }else{
+        this.set('showBack', false);
+      }
+    }
+
+  })),
+
+  observeType: Ember.observer('gastos', function(){
+    this._getPages();
+    this._getDatos();
+  }),
+
   _getPages: function () {
     var promisePages = new Promise (function(resolve){
       this.Data.get('userRef')
@@ -30,6 +66,11 @@ export default Ember.Controller.extend({
             if(values && values.numGastos > 0){
               var tempNum = values.numGastos / this.get('itemsPerPage');
               tempNum = Math.ceil(tempNum);
+
+              // Setup visual pagination variables
+              this.set('currentTotal', tempNum);
+              this.set('currentPage', 1);
+
               var tempPaginas = [];
               while(tempNum > 0){
                 var pageObj = {
@@ -38,9 +79,9 @@ export default Ember.Controller.extend({
                 };
                 if(tempNum === 1){
                   pageObj.state = true;
-                  tempPaginas.push(pageObj);
+                  tempPaginas.splice(0, 0, pageObj);
                 }else{
-                  tempPaginas.push(pageObj);
+                  tempPaginas.splice(0, 0, pageObj);
                 }
 
                 tempNum -= 1;
@@ -51,6 +92,36 @@ export default Ember.Controller.extend({
               this.set('paginasGastos', [0]);
               resolve('No existen gastos');
             }
+
+            if(values && values.numIngresos > 0){
+              var tempNum = values.numIngresos / this.get('itemsPerPage');
+              tempNum = Math.ceil(tempNum);
+
+              // Setup visual pagination variables
+              this.set('currentTotal', tempNum);
+              this.set('currentPage', 1);
+
+              var tempPaginas = [];
+              while(tempNum > 0){
+                var pageObj = {
+                  page : tempNum,
+                  state: false,
+                };
+                if(tempNum === 1){
+                  pageObj.state = true;
+                  tempPaginas.splice(0, 0, pageObj);
+                }else{
+                  tempPaginas.splice(0, 0, pageObj);
+                }
+
+                tempNum -= 1;
+              }
+              this.set('paginasIngresos', tempPaginas);
+              resolve('Existed páginas de gastos');
+            }else{
+              this.set('paginasIngresos', [0]);
+              resolve('No existen ingresos');
+            }
           }.bind(this));
     }.bind(this));
     return promisePages;
@@ -59,21 +130,27 @@ export default Ember.Controller.extend({
   _getDatos: function(){
     var promiseDatos = new Promise(function(resolve){
       if(this.get('gastos')){
-        this.Data.get('userRef').child('datos').child('gastos').on('value', function(snap){
+
+        var tempDate = new Date();
+        var millis = tempDate.getTime() - (30*24*60*60*1000);
+
+        this.Data.get('userRef').child('datos').child('gastos').orderByChild("fecha").startAt(millis).on('value', function(snap){
           var value = snap.val();
           if (value) {
             var arrData = this.Data.objectToArray(snap.val());
+            arrData.sort(function(a, b){
+              return b.fecha-a.fecha;
+            });
             for (var i = 0; i < arrData.length; i++) {
               var date = new Date(arrData[i].fecha);
-              console.log(date);
               var tempString = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + (date.getDate());
               arrData[i].fecha = tempString;
             }
-            this.set('datosLista', arrData);
+            this.set('datosCompletos', arrData);
           }
           resolve('Datos encontrados');
         }.bind(this), function(err){
-          console.log(err);
+          (err);
           resolve({error: err});
         });
       }else{
@@ -81,11 +158,19 @@ export default Ember.Controller.extend({
           var value = snap.val();
           if (value) {
             var arrData = this.Data.objectToArray(snap.val());
-            this.set('datosLista', arrData);
+            arrData.sort(function(a, b){
+              return b.fecha-a.fecha;
+            });
+            for (var i = 0; i < arrData.length; i++) {
+              var date = new Date(arrData[i].fecha);
+              var tempString = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + (date.getDate());
+              arrData[i].fecha = tempString;
+            }
+            this.set('datosCompletos', arrData);
           }
           resolve('Datos encontrados');
         }.bind(this), function(err){
-          console.log(err);
+          (err);
           resolve({error: err});
         });
       }
@@ -93,6 +178,111 @@ export default Ember.Controller.extend({
     }.bind(this));
 
     return promiseDatos;
+  },
+
+  actions: {
+    pageDown: function(){
+
+      var page = this.get('currentPage');
+      var tempNum = this.get('currentTotal');
+
+      if(this.get('gastos')){
+        tempNum = Math.ceil(tempNum);
+
+        var tempPaginas = [];
+        while(tempNum > 0){
+          var pageObj = {
+            page : tempNum,
+            state: false,
+          };
+          if(tempNum === page-1){
+            pageObj.state = true;
+            tempPaginas.splice(0, 0, pageObj);
+          }else{
+            tempPaginas.splice(0, 0, pageObj);
+          }
+
+          tempNum -= 1;
+        }
+        this.set('paginasGastos', tempPaginas);
+      }else{
+        tempNum = Math.ceil(tempNum);
+
+        var tempPaginas = [];
+        while(tempNum > 0){
+          var pageObj = {
+            page : tempNum,
+            state: false,
+          };
+          if(tempNum === page-1){
+            pageObj.state = true;
+            tempPaginas.splice(0, 0, pageObj);
+          }else{
+            tempPaginas.splice(0, 0, pageObj);
+          }
+
+          tempNum -= 1;
+        }
+        this.set('paginasIngresos', tempPaginas);
+      }
+      this.set ('currentPage', page-1);
+    },
+
+    pageUp: function(){
+
+      var page = this.get('currentPage');
+      var tempNum = this.get('currentTotal');
+
+      if(this.get('gastos')){
+        tempNum = Math.ceil(tempNum);
+
+        var tempPaginas = [];
+        while(tempNum > 0){
+          var pageObj = {
+            page : tempNum,
+            state: false,
+          };
+          if(tempNum === page+1){
+            pageObj.state = true;
+            tempPaginas.splice(0, 0, pageObj);
+          }else{
+            tempPaginas.splice(0, 0, pageObj);
+          }
+
+          tempNum -= 1;
+        }
+        this.set('paginasGastos', tempPaginas);
+      }else{
+        tempNum = Math.ceil(tempNum);
+
+        var tempPaginas = [];
+        while(tempNum > 0){
+          var pageObj = {
+            page : tempNum,
+            state: false,
+          };
+          if(tempNum === page+1){
+            pageObj.state = true;
+            tempPaginas.splice(0, 0, pageObj);
+          }else{
+            tempPaginas.splice(0, 0, pageObj);
+          }
+
+          tempNum -= 1;
+        }
+        this.set('paginasIngresos', tempPaginas);
+      }
+      this.set ('currentPage', page+1);
+    },
+
+
+    toggleType: function(type){
+      if(type === 'gasto'){
+        this.set('gastos', true);
+      }else{
+        this.set('gastos', false);
+      }
+    }
   }
 
 });
