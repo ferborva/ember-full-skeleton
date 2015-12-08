@@ -7,13 +7,14 @@ export default Ember.Controller.extend({
 
   init: function(){
     this._super.apply(this, arguments);
-    this.Data.get('presentUsersRef').on('value', function(snapshot){
-        if (snapshot.val() !== null) {
-          var arrData = this.Data.objectToArray(snapshot.val());
-          this.set('onlineUsers', arrData);
-        } else {
-          this.set('onlineUsers', '');
-        }
-    }.bind(this));
+
+    this.Data.openSocket('presentUsersRef', [], 'onlineUsers').then(
+      function (data) {
+        this.set('onlineUsers', data);
+      }.bind(this),
+      function (errorObj) {
+        console.log(errorObj);
+      }.bind(this)
+    );
   }
 });
