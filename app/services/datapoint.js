@@ -486,6 +486,137 @@ export default Ember.Service.extend({
     }.bind(this));
     return promise;
 
+  },
+
+  turnFireOff: function(reference, childrenArray, dataKey){
+    // Abstract
+
+    /*
+
+      Function.
+      Will take care of turning socket off
+
+      This is a simple helper function. Not intended to be used necessarily in
+      real time uses. This is due to the posible simplicity of doing the same.
+
+      After a developer might open a real time socket with firebase using the following:
+
+        this.Data.get('userRef').child('profile').on('value', function(data){
+          //Save data
+        }, function(error){
+          //Display error
+        });
+
+        or
+
+        this.Data.get('userRef').child('profile').once('value', function(data){
+          //Save data
+        }, function(error){
+          //Display error
+        });
+
+
+        this.Data.get('userRef').child('profile').on('child_added', function(newData, previousDataId){
+          //Add/process new data
+        }, function(error){
+          //Display error
+        });
+
+
+        this.Data.get('userRef').child('profile').on('child_removed', function(deletedData, previousDataId){
+          //Remove/process old data
+        }, function(error){
+          //Display error
+        });
+
+      Once the flow has been controlled, if we leave the page and want to close the socket
+      we could do this by:
+
+        Calling this method - this.Data.turnFireOff()
+
+        or
+
+        this.Data.get(ref).child(...).child(....).off();
+
+
+      Either way, same effect is obtained.
+
+
+
+    */
+
+    var promise = new Promise(function(resolve, reject){
+
+      //Get data switch FUNCTION
+      function turnOff(self, ref, childArray, childLen){
+        var promise = new Promise(function (resolve, reject) {
+          if(ref === null){
+            ref = 'baseRef';
+          }
+          // Set Data
+          switch(childLen){
+            case 0:
+              self.get(ref).off();a
+              resolve();
+              break;
+            case 1:
+              self.get(ref).child(childArray[0])
+                           .off();
+              resolve();
+              break;
+            case 2:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .off();
+              resolve();
+              break;
+            case 3:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .off();
+              resolve();
+              break;
+            case 4:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .child(childArray[3])
+                           .off();
+              resolve();
+              break;
+            case 5:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .child(childArray[3])
+                           .child(childArray[4])
+                           .off();
+              resolve();
+              break;
+            case 6:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .child(childArray[3])
+                           .child(childArray[4])
+                           .child(childArray[5])
+                           .off();
+              resolve();
+              break;
+          };
+        });
+        return promise;
+      };
+
+      // Children length
+      var childLength = childrenArray.length;
+      turnOff(this, reference, childrenArray, childLength)
+          .then(function () {
+              resolve('Socket turned off.');
+          }.bind(this));
+    }.bind(this));
+    return promise;
   }
 });
 
