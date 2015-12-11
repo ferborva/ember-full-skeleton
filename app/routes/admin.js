@@ -6,7 +6,6 @@ export default Base.extend({
   securityLevel: 3,
 
   model: function(){
-
     var promise = new Promise(function(resolve, reject){
       // Grab data. If found in datapoint.key (existingUsers in this case) else from server.
       this.Data.grabData(null, ['users'], 'existingUsers').then(
@@ -39,6 +38,9 @@ export default Base.extend({
               console.log('no data access');
               reject();
             }.bind(this));
+          }
+          else{
+            resolve();
           }
 
         }.bind(this),
