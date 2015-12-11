@@ -5,19 +5,52 @@ export default Base.extend({
   auth: true,
   securityLevel: 3,
 
-  model: function () {
-    var promise = new Promise(function(resolve, reject) {
-      this.Data.openSocket('presentUsersRef', [], 'onlineUsers').then(
+  model: function(){
+
+    var promise = new Promise(function(resolve, reject){
+      // Grab data. If found in datapoint.key (existingUsers in this case) else from server.
+      this.Data.grabData(null, ['users'], 'existingUsers').then(
         function (data) {
-          resolve(data);
+          // Users retrieved, saved to a Datapoint property
+          // and aliased to our controller property for use.
+
+          if(!data[0].roleLevel){
+            // Get user roles
+            this.Data.grabData(null, ['roles'], 'roles').then(function(data){
+                if (data !== null) {
+                  var users = this.Data.get('existingUsers');
+                  for (var i = 0; i < users.length; i++) {
+                    var found = false;
+                    for (var j = 0; j < data.length; j++) {
+                      if(users[i].key === data[j].key){
+                        users[i].roleLevel = data[j].level;
+                        found= true;
+                      }
+                    }
+                    if(!found){
+                      users[i].roleLevel = null;
+                    }
+                  }
+                  console.log('data');
+                  this.Data.set('existingUsers', users);
+                  resolve();
+                }
+            }.bind(this), function(){
+              console.log('no data access');
+              reject();
+            }.bind(this));
+          }
+
         }.bind(this),
         function (errorObj) {
-          reject(errorObj);
+          console.log('FLAME_ERROR_LOG: Failed on grabData method call. You might have lost your internet conexion.')
+          reject();
         }.bind(this)
       );
     }.bind(this));
 
     return promise;
-  },
+
+  }
 
 });
