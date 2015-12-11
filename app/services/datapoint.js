@@ -230,6 +230,17 @@ export default Ember.Service.extend({
     return items;
   },
 
+
+  _grabDataHelper: function(data, key){
+    var arrData = this.objectToArray(data);
+    if (key) {
+      this.set(key, arrData);
+      return({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
+    }else{
+      return({message: 'Data downloaded. Not saved.', data: arrData});
+    }
+  },
+
   // If reference null, defaults to baseRef.
   grabData: function (reference, childrenArray, dataKey) {
 
@@ -256,13 +267,8 @@ export default Ember.Service.extend({
               self.get(ref).once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
@@ -272,13 +278,8 @@ export default Ember.Service.extend({
                            .once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
@@ -289,13 +290,8 @@ export default Ember.Service.extend({
                            .once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
@@ -307,13 +303,8 @@ export default Ember.Service.extend({
                            .once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
@@ -326,13 +317,8 @@ export default Ember.Service.extend({
                            .once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
@@ -346,13 +332,8 @@ export default Ember.Service.extend({
                            .once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
@@ -367,13 +348,8 @@ export default Ember.Service.extend({
                            .once('value',
                 function(snap){
                   var values = snap.val();
-                  var arrData = self.objectToArray(values);
-                  if (key) {
-                    self.set(key, arrData);
-                    resolve({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
-                  }else{
-                    resolve({message: 'Data downloaded. Not saved.', data: arrData});
-                  }
+                  var data = self._grabDataHelper(values, key);
+                  resolve(data);
                 }.bind(self), function(errorObj){
                   reject({error: errorObj});
                 }.bind(self));
