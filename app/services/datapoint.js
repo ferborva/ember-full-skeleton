@@ -488,7 +488,7 @@ export default Ember.Service.extend({
 
   },
 
-  turnFireOff: function(reference, childrenArray, dataKey){
+  turnFireOff: function(reference, childrenArray){
     // Abstract
 
     /*
