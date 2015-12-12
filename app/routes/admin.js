@@ -53,6 +53,18 @@ export default Base.extend({
 
     return promise;
 
+  },
+
+  setupController: function(controller, model){
+    console.log(controller);
+    controller.setup();
+  },
+
+  actions: {
+    willTransition: function(transition){
+      this.Data.turnFireOff(null, ['presence']);
+      this._super(transition);
+    }
   }
 
 });
