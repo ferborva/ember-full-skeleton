@@ -122,30 +122,30 @@ export default Ember.Service.extend({
       self.set('userData.profile', self.get('session.currentUser'));
       self.set('userData.profile.provider', tempProvider);
       self.set('userData.securityLevel', '');
-      self.get('userRef').child('profile').on("value", function(snapshot) {
-        if (snapshot.val() === null) {
+      self.grabData('userRef', ['profile'], null).then(function(data){
+        if (data === null) {
           var tempUserData = self.get('session.currentUser');
           tempUserData.provider = self.get('session.provider');
-          self.get('userRef').child('profile').set(tempUserData);
+          self.setData('userRef', ['profile'], tempUserData);
         }
+        checkUserConfig();
       });
     }
 
     function checkUserConfig(){
-      self.get('userRef').child('config').once("value", function(snapshot) {
-        if (snapshot.val() === null) {
+      self.grabData('userRef', ['config'], 'userData.config').then(function(data){
+        if(data === null){
           var tempConfigData = {
             'notify': false,
             'avatar': 'avatar-1'
           };
-          self.get('userRef').child('config').set(tempConfigData);
+          self.setData('userRef', ['config'], tempConfigData);
         }
       });
     }
 
     if(this.get('userRef') !== ''){
       checkProfile();
-      checkUserConfig();
       this.setupPresence();
     } else {
       var tempProvider = self.get("session.provider");
@@ -160,7 +160,6 @@ export default Ember.Service.extend({
 
       self.set('userRef', new Firebase(userUrl));
       checkProfile();
-      checkUserConfig();
       self.setupPresence();
     }
 
@@ -197,15 +196,15 @@ export default Ember.Service.extend({
 
   checkSecurityLevel: function(level){
     var promise = new Promise(function(resolve, reject){
-      if(this.get('userData.securityLevel') && this.get('userData.securityLevel') == level){
+      if(this.get('userData') && this.get('userData.securityLevel') >= level){
         resolve('Access given');
-      }else if(this.get('userData.securityLevel') === 'No Access'){
+      }else if(this.get('userData') && this.get('userData.securityLevel') === 'No Access'){
         reject('Security not cleared');
       }else{
-        this.get('baseRef').child('security').child('level' + level).once('value', function (snapshot) {
+        this.grabData(null, ['security', 'level'+level], null).then(function(data){
           this.set('userData.securityLevel', level);
           resolve('Access given');
-        }.bind(this), function (err) {
+        }.bind(this), function(err){
           // code to handle read error
           this.set('userData.securityLevel', 'No Access');
           console.log('Security level not high enough.');
@@ -223,6 +222,7 @@ export default Ember.Service.extend({
   objectToArray: function (obj) {
     var keys = Object.keys(obj);
     var items = [];
+    console.log('stop');
     for (var j=0; j < keys.length; j++) {
       items[j] = obj[keys[j]];
       items[j].key = keys[j];
@@ -232,7 +232,16 @@ export default Ember.Service.extend({
 
 
   _grabDataHelper: function(data, key){
-    var arrData = this.objectToArray(data);
+    console.log('stop 2');
+    var keys = Object.keys(data);
+    var type = typeof data[keys[0]];
+    if(data !== null && type == 'object'){
+      var arrData = this.objectToArray(data);
+    }else if(data !== null){
+      var arrData = data;
+    }else{
+      var arrData = null;
+    }
     if (key) {
       this.set(key, arrData);
       return({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});
@@ -465,7 +474,7 @@ export default Ember.Service.extend({
   },
 
   // If reference null, defaults to baseRef.
-  setData: function (reference, childrenArray, dataKey, data) {
+  setData: function (reference, childrenArray, data) {
 
     var promise = new Promise(function(resolve, reject){
 

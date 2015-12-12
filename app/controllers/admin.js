@@ -92,8 +92,8 @@ export default Ember.Controller.extend({
 
   actions: {
     updateDisplayName: function(user){
-      this.Data.setData(null, ['users', user.key, 'profile'], null, user.profile);
-      this.Data.setData(null, ['roles', user.key, 'level'], null, user.roleLevel);
+      this.Data.setData(null, ['users', user.key, 'profile'], user.profile);
+      this.Data.setData(null, ['roles', user.key, 'level'], user.roleLevel);
       this.set('tempUser', user);
       this.set('tempUser.editting', false);
       this.Toast.addToast(this.get('i18n').t('label.dataSaved'), 2000);
