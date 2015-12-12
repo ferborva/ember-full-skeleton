@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   existingUsers: Ember.computed.alias('this.Data.existingUsers'),
   tempUser: '',
 
-  init: function () {
+  setup: function () {
 
 
     this.Data.get('baseRef').child('presence').on('child_added', function(newData, previousDataId){
