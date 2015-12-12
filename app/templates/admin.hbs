@@ -43,6 +43,9 @@
                             <i class="material-icons right">done</i>
                             {{t 'label.save'}}
                           </button>
+                          <a class="waves-effect waves-light btn modal-trigger waves-black red white-text" href="#yesNoModal" {{action 'setDeleteAction' user}}>
+                            Delete X
+                          </a>
                       </form>
                     {{else}}
                       <span class="title">{{user.profile.displayName}}</span>
@@ -88,6 +91,7 @@
   </div>
 </div>
 
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('.collapsible').collapsible({
@@ -104,6 +108,19 @@ $(document).ready(function(){
         alignment: 'left' // Displays dropdown with edge aligned to the left of button
       }
     );
+
+    // Modal config
+    $('.modal-trigger').leanModal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      in_duration: 400, // Transition in duration
+      out_duration: 250, // Transition out duration
+
+      //ready: function() { alert('Ready'); }, // Callback for Modal open
+      complete: function() {
+        $('.lean-overlay').remove();
+      } // Callback for Modal close
+    });
 
   });
 </script>
