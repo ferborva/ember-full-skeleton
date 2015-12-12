@@ -16,11 +16,18 @@
         <li><a class="blue-text text-darken-4" {{action 'setLocale' 'es'}}>{{t 'lang.spanish'}}</a></li>
       </ul>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#!">First Sidebar Link</a></li>
-      <li><a href="#!">Second Sidebar Link</a></li>
+      <li>
+        {{#link-to 'admin'}}
+          <span>Admin</span>
+        {{/link-to}}
+      </li>
       <li>
         {{#if session.isAuthenticated}}
           <a {{action "signOut"}}>Sign out</a>
+        {{else}}
+          {{#link-to 'login'}}
+            {{t 'label.signIn'}}
+          {{/link-to}}
         {{/if}}
       </li>
     </ul>
@@ -32,17 +39,19 @@
         </div>
       </div>
       <ul>
-        <li><a href="#!">First Sidebar Link</a></li>
-        <li><a href="#!">Second Sidebar Link</a></li>
         <li class="divider"></li>
         <li>{{link-to 'Admin' 'admin'}}</li>
         <li class="divider"></li>
-        {{#if session.isAuthenticated}}
-          <li>
-              <a {{action "signOut"}}>Sign out</a>
-          </li>
-          <li class="divider"></li>
-        {{/if}}
+        <li>
+          {{#if session.isAuthenticated}}
+            <a {{action "signOut"}}>Sign out</a>
+          {{else}}
+            {{#link-to 'login'}}
+              {{t 'label.signIn'}}
+            {{/link-to}}
+          {{/if}}
+        </li>
+        <li class="divider"></li>
       </ul>
     </div>
     <a href="#" data-activates="slide-out" class="button-collapse right"><i class="left mdi-navigation-menu"></i></a>
