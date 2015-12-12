@@ -55,6 +55,28 @@ export default Ember.Route.extend({
     focusHoverOut: function (id) {
       id = '#' + id;
       $(id).removeClass('block-focus-border');
+    },
+
+    yesToModal: function(){
+      $('.modal-action').click();
+      var data = {
+        message: 'yes',
+        action: this.Data.get('modalAction'),
+        data: this.Data.get('modalData')
+      };
+      var currPath = this.router.currentRouteName;
+      Flamestack.__container__.lookup('controller:' + currPath).set('modalAnswer', data);
+    },
+
+    noToModal: function(){
+      $('.modal-action').click();
+      var data = {
+        message: 'no',
+        action: this.Data.get('modalAction'),
+        data: this.Data.get('modalData')
+      };
+      var currPath = this.router.currentRouteName;
+      Flamestack.__container__.lookup('controller:' + currPath).set('modalAnswer', data);
     }
   }
 });

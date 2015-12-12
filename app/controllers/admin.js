@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   onlineUsers: [],
   existingUsers: Ember.computed.alias('this.Data.existingUsers'),
   tempUser: '',
+  modalAnswer: '',
 
   setup: function () {
 
@@ -66,6 +67,29 @@ export default Ember.Controller.extend({
     }.bind(this));
   },
 
+  observeModal: Ember.observer('modalAnswer', function(){
+    var modalData = this.get('modalAnswer');
+    if(modalData && modalData.action){
+      if(modalData.action === 'deleteRecord' && modalData.message === 'yes' && modalData.data.key){
+        this.Data.deleteData(null, ['users', modalData.data.key]).then(function(data){
+          // Server data deleted. Now remove local copy
+          console.log(data);
+          var tempusers = this.get('existingUsers');
+          for (var i = 0; i < tempusers.length; i++) {
+            if (tempusers[i].key === modalData.data.key) {
+              tempusers.removeAt(i);
+            }
+          }
+          this.send('toggleEdit', modalData.data);
+        }.bind(this), function(err){
+          console.log(err);
+        })
+      }else{
+        this.send('toggleEdit', modalData.data);
+      }
+    }
+  }),
+
   actions: {
     updateDisplayName: function(user){
       this.Data.setData(null, ['users', user.key, 'profile'], null, user.profile);
@@ -82,6 +106,17 @@ export default Ember.Controller.extend({
       }else{
         this.set('tempUser.editting', false);
       }
+      // Setup modal triggers
+      setTimeout(function(){
+        $('.modal-trigger').leanModal();
+      }, 200);
+
+    },
+
+    setDeleteAction: function(user){
+      this.Data.set('modalAction', 'deleteRecord');
+      this.Data.set('modalData', user);
+      return false;
     }
   }
 });
