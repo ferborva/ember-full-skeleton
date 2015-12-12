@@ -12,7 +12,6 @@ export default Ember.Controller.extend({
 
     this.Data.get('baseRef').child('presence').on('child_added', function(newData, previousDataId){
       //Add/process new data
-      console.log('child added admin');
 
       var arrData = [];
       var values = newData.val();
@@ -43,8 +42,6 @@ export default Ember.Controller.extend({
 
     this.Data.get('baseRef').child('presence').on('child_removed', function(deletedData){
       //Remove/process old data
-      console.log('child removed admin');
-      console.log(deletedData);
 
       var arrData = [];
       var values = deletedData.val();
