@@ -252,7 +252,7 @@ export default Ember.Service.extend({
           return true;
         }
         return false;
-      };
+      }
 
       //Get data switch FUNCTION
       function getData(self, ref, childArray, childLen, key){
@@ -357,7 +357,7 @@ export default Ember.Service.extend({
           };
         });
         return promise;
-      };
+      }
 
       // Check if the dataKey has data
       if(dataKey && checkData(this, dataKey)){
@@ -372,6 +372,93 @@ export default Ember.Service.extend({
               reject(dataGetResult.error);
             }.bind(this));
       }
+    }.bind(this));
+    return promise;
+
+  },
+
+  // If reference null, defaults to baseRef.
+  deleteData: function (reference, childrenArray) {
+
+    var promise = new Promise(function(resolve, reject){
+
+      //Get data switch FUNCTION
+      function deleteFunction(self, ref, childArray, childLen){
+        var promise = new Promise(function (resolve, reject) {
+          if(ref === null){
+            ref = 'baseRef';
+          }
+          // Set Data
+          switch(childLen){
+            case 0:
+              self.get(ref).remove(function(){
+                              resolve({message: 'Data erased'});
+                            });
+              break;
+            case 1:
+              self.get(ref).child(childArray[0])
+                           .remove(function(){
+                             resolve({message: 'Data erased'});
+                           });
+              break;
+            case 2:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .remove(function(){
+                             resolve({message: 'Data erased'});
+                           });
+              break;
+            case 3:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .remove(function(){
+                             resolve({message: 'Data erased'});
+                           });
+              break;
+            case 4:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .child(childArray[3])
+                           .remove(function(){
+                             resolve({message: 'Data erased'});
+                           });
+              break;
+            case 5:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .child(childArray[3])
+                           .child(childArray[4])
+                           .remove(function(){
+                             resolve({message: 'Data erased'});
+                           });
+              break;
+            case 6:
+              self.get(ref).child(childArray[0])
+                           .child(childArray[1])
+                           .child(childArray[2])
+                           .child(childArray[3])
+                           .child(childArray[4])
+                           .child(childArray[5])
+                           .remove(function(){
+                             resolve({message: 'Data erased'});
+                           });
+              break;
+          };
+        });
+        return promise;
+      }
+
+      // Children length
+      var childLength = childrenArray.length;
+      deleteFunction(this, reference, childrenArray, childLength)
+          .then(function (dataGetResult) {
+              resolve(dataGetResult.message);
+          }.bind(this), function (dataGetResult) {
+            reject(dataGetResult);
+          }.bind(this));
     }.bind(this));
     return promise;
 
@@ -532,7 +619,7 @@ export default Ember.Service.extend({
           // Set Data
           switch(childLen){
             case 0:
-              self.get(ref).off();a
+              self.get(ref).off();
               resolve();
               break;
             case 1:
