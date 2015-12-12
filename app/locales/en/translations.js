@@ -25,7 +25,8 @@ export default {
     "saveSecurity": "Save Role",
     "securityLevel": "Security Level",
     "languageChange": "The language has been successfully changed to English",
-    "edit": "Edit"
+    "edit": "Edit",
+    "signIn": "Sign in"
   },
   "lang": {
     "english": "English",
