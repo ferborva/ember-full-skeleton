@@ -1,20 +1,24 @@
 <div class="navbar-fixed">
   <nav class="blue darken-2">
-    <div class="brand-logo thin">
-      <div class="valign-wrapper" {{action 'redirectHome'}}>
+    <div class="brand-logo thin" {{action 'redirectHome'}}>
+      <div class="valign-wrapper">
         <img class="logo-image" src="/assets/img/cash-dark.png">
         <span class="hide-on-small-only">Cash App</span>
         <span class="hide-on-med-and-up">Cash</span>
       </div>
     </div>
+
+    <!-- LANGUAGE dropdown
+
     <i class="dropdown-button material-icons right lang-icon pointer" data-activates='dropdown1' style="
     font-size: 40px;">language</i>
-      <!-- Dropdown Structure -->
+      <!-- Dropdown Structure --
       <ul id='dropdown1' class='dropdown-content'>
         <li><a class="blue-text text-darken-4" {{action 'setLocale' 'en'}}>{{t 'lang.english'}}</a></li>
         <li class="divider"></li>
         <li><a class="blue-text text-darken-4" {{action 'setLocale' 'es'}}>{{t 'lang.spanish'}}</a></li>
       </ul>
+    -->
     <ul class="right hide-on-med-and-down">
       <li>
         {{#if session.isAuthenticated}}
