@@ -14,12 +14,68 @@
       <form class="col s12" {{action "guardarGasto" on="submit"}}>
         <div class="row">
           <div class="input-field col s12 m6">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">filter_drama</i>
+                  Categoria
+                  <span class="right">
+                    {{#if catSelected}}
+                      <u>{{gasto.tipo}}</u>
+                    {{else}}
+                      <div class="thin">
+                        Selecciona opc.
+                      </div>
+                    {{/if}}
+                  </span>
+                </div>
+                <div class="collapsible-body">
+                  {{#each categorias as |cat index|}}
+                    <p {{action 'selectedCat' cat}} class="waves-effect full-width waves-teal">
+                      <input class="with-gap" name="group-categorias" type="radio" id=cat value=cat>
+                      <label for={{cat}}>{{cat}}</label>
+                    </p>
+                  {{/each}}
+                </div>
+              </li>
+              <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">filter_drama</i>
+                  Modo de pago
+                  <span class="right">
+                    {{#if sistSelected}}
+                      <u>{{gasto.sistema}}</u>
+                    {{else}}
+                      <div class="thin">
+                        Selecciona opc.
+                      </div>
+                    {{/if}}
+                  </span>
+                </div>
+                <div class="collapsible-body">
+                  {{#each sistemas as |sist index|}}
+                    <p {{action 'selectedSist' sist}} class="waves-effect full-width waves-teal">
+                      {{input class="with-gap" name="group-sistemas" type="radio" id=sist }}
+                      <label for={{sist}}>{{sist}}</label>
+                    </p>
+                  {{/each}}
+                </div>
+              </li>
+            </ul>
+            <!--
             {{view "select" content=categorias value=gasto.tipo}}
+
             <label>Categoría</label>
+            -->
           </div>
           <div class="input-field col s12 m6">
+            <ul class="collapsible" data-collapsible="accordion">
+
+            </ul>
+            <!--
             {{view "select" content=sistemas value=gasto.sistema}}
             <label>Sistema de pago</label>
+            -->
           </div>
           <div class="input-field col s12 m6">
             <i class="material-icons prefix">query_builder</i>
@@ -68,6 +124,9 @@
   $(document).ready(function() {
       $('ul.tabs').tabs();
       $('select').material_select();
+      $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
   });
 
 </script>
