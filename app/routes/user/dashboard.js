@@ -56,6 +56,9 @@ export default Base.extend({
               totalGastos += Number(gastos[i].importe);
             }
           }
+
+          totalGastos = parseFloat(Math.round(totalGastos*100)/100).toFixed(2);
+
           resolve({totalGastos: totalGastos});
         }.bind(this), function(err){
           console.log(err);
@@ -98,6 +101,9 @@ export default Base.extend({
               totalIngresos += Number(ingresos[i].importe);
             }
           }
+
+          totalIngresos = parseFloat(Math.round(totalIngresos*100)/100).toFixed(2);
+
           resolve({totalIngresos: totalIngresos});
         }.bind(this), function(err){
           console.log(err);

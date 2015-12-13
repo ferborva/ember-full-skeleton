@@ -7,19 +7,37 @@
     <div class="dash-block-top blue lighten-5 center-align">
       <div class="icon-block">
         {{#if model}}
-          <h4 class="center thin" style="margin-top:0; padding-top: 20px">Resumen Primera vista</h4>
+          <h5 class="center thin" style="margin-top:0; padding-top: 20px">Resumen</h5>
         {{else}}
           <h4 class="center thin" style="margin-top:0; padding-top: 20px">No hay datos</h4>
         {{/if}}
         <div class="row">
-          <div class="col s6 right-align">
-            <h5>Gastos: <span>{{model.totalGastos}}</span> €</h5>
+          <div class="col s6 center-align">
+            <div>
+              Gastos
+                <i class="material-icons tiny">
+                  thumb_down
+                </i>
+            </div>
+            <span class="currency-dashboard red-text text-darken-2">
+              {{model.totalGastos}} €
+            </span>
           </div>
-          <div class="col s6 left-align">
-            <h5>Ingresos: <span>{{model.totalIngresos}}</span> €</h5>
+          <div class="col s6 center-align">
+            <div>
+              Ingresos
+                <i class="material-icons tiny">
+                  thumb_up
+                </i>
+            </div>
+            <span class="currency-dashboard green-text text-darken-3">
+              {{model.totalIngresos}} €
+            </span>
+          </div>
+          <div class="col s12 center-align">
+            <p class="light"><i>*Balance desde el día 1 de este mes.</i></p>
           </div>
         </div>
-        <p class="light"><i>*Balance desde el día 1 de este mes.</i></p>
       </div>
     </div>
 
