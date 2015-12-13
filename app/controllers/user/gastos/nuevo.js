@@ -74,6 +74,8 @@ export default Ember.Controller.extend({
         sistema: '',
         fecha: ''
       });
+      this.set('catSelected', false);
+      this.set('sistSelected', false);
       this._resetDate();
 
       // Transition and toast
@@ -84,6 +86,20 @@ export default Ember.Controller.extend({
 
     toggleType: function(type){
       this.set('type', type);
+    },
+
+    selectedCat: function(categoria){
+      console.log(categoria);
+      this.set('gasto.tipo', categoria);
+      this.set('catSelected', true);
+    },
+
+    selectedSist: function(sistema){
+      console.log(sistema);
+      this.set('gasto.sistema', sistema);
+      this.set('sistSelected', true);
     }
+
+
   }
 });
