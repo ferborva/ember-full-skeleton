@@ -30,12 +30,10 @@ export default Base.extend({
                       users[i].roleLevel = null;
                     }
                   }
-                  console.log('data');
                   this.Data.set('existingUsers', users);
                   resolve();
                 }
             }.bind(this), function(){
-              console.log('no data access');
               reject();
             }.bind(this));
           }
@@ -56,7 +54,6 @@ export default Base.extend({
   },
 
   setupController: function(controller, model){
-    console.log(controller);
     controller.setup();
   },
 

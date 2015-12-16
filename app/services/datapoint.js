@@ -222,7 +222,6 @@ export default Ember.Service.extend({
   objectToArray: function (obj) {
     var keys = Object.keys(obj);
     var items = [];
-    console.log('stop');
     for (var j=0; j < keys.length; j++) {
       items[j] = obj[keys[j]];
       items[j].key = keys[j];
@@ -232,7 +231,6 @@ export default Ember.Service.extend({
 
 
   _grabDataHelper: function(data, key){
-    console.log('stop 2');
     var keys = Object.keys(data);
     var type = typeof data[keys[0]];
     if(data !== null && type == 'object'){
