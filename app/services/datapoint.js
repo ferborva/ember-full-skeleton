@@ -247,7 +247,7 @@ export default Ember.Service.extend({
       return({message: 'Data downloaded. Not saved.', data: arrData});
     }
   },
-
+/*
   // If reference null, defaults to baseRef.
   grabData: function (reference, childrenArray, dataKey) {
 
@@ -373,6 +373,66 @@ export default Ember.Service.extend({
         // Children length
         var childLength = childrenArray.length;
         getData(this, reference, childrenArray, childLength, dataKey)
+            .then(function (dataGetResult) {
+                resolve(dataGetResult.data);
+            }.bind(this), function (dataGetResult) {
+              reject(dataGetResult.error);
+            }.bind(this));
+      }
+    }.bind(this));
+    return promise;
+
+  },
+
+  */
+
+  // If reference null, defaults to baseRef.
+  grabData: function (reference, childrenArray, dataKey) {
+
+    var promise = new Promise(function(resolve, reject){
+
+      //Check data function
+      function checkData(self, dataKey){
+        if(self.get(dataKey)){
+          return true;
+        }
+        return false;
+      }
+
+      //Get data switch FUNCTION
+      function getData(self, ref, childArray, key){
+        var promise = new Promise(function (resolve, reject) {
+
+          var instruction = '';
+
+          if(ref === null){
+            ref = 'baseRef';
+          }
+
+          instruction += 'self.get("' + ref + '")';
+
+          for (var i = 0; i < childArray.length; i++) {
+            instruction += '.child("' + childArray[i] + '")';
+          }
+
+          eval(instruction).once('value',
+            function(snap){
+              var values = snap.val();
+              var data = self._grabDataHelper(values, key);
+              resolve(data);
+            }.bind(self), function(errorObj){
+              reject({error: errorObj});
+            }.bind(self));
+        });
+        return promise;
+      }
+
+      // Check if the dataKey has data
+      if(dataKey && checkData(this, dataKey)){
+        resolve(this.get(dataKey));
+      }else{
+
+        getData(this, reference, childrenArray, dataKey)
             .then(function (dataGetResult) {
                 resolve(dataGetResult.data);
             }.bind(this), function (dataGetResult) {
