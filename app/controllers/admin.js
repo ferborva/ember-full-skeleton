@@ -3,12 +3,14 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   onlineUsers: [],
-  existingUsers: Ember.computed.alias('Data.existingUsers'),
+  existingUsers: '',
   tempUser: '',
   modalAnswer: '',
 
   setup: function () {
 
+    var loadedUsers = this.Data.get('existingUsers');
+    this.set('existingUsers', loadedUsers);
 
     this.Data.get('baseRef').child('presence').on('child_added', function(newData, previousDataId){
       //Add/process new data
