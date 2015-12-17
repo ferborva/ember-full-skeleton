@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
 
   Data: Ember.inject.service('datapoint'),
   onlineUsers: [],
-  existingUsers: Ember.computed.alias('this.Data.existingUsers'),
+  existingUsers: Ember.computed.alias('Data.existingUsers'),
   tempUser: '',
   modalAnswer: '',
 
