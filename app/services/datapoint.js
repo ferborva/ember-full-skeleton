@@ -106,10 +106,10 @@ export default Ember.Service.extend({
     this.get('presenceRef').set(null);
     this.get('session').close().then(function(){
       this.Toast.addToast(this.get('i18n').t('success.loggedOut'), 2000);
-    }.bind(this), null);
 
-    // optional - Redirect to Login on Logout
-      this.get('routing').transitionTo('login');
+      // optional - Redirect to Login on Logout
+      this.get('routing').transitionTo('index');
+    }.bind(this), null);
   },
 
 
@@ -231,15 +231,18 @@ export default Ember.Service.extend({
 
 
   _grabDataHelper: function(data, key){
-    var keys = Object.keys(data);
-    var type = typeof data[keys[0]];
-    if(data !== null && type == 'object'){
-      var arrData = this.objectToArray(data);
-    }else if(data !== null){
-      var arrData = data;
-    }else{
+    if(data === null){
       var arrData = null;
+    }else{
+      var keys = Object.keys(data);
+      var type = typeof data[keys[0]];
+      if(data !== null && type == 'object'){
+        var arrData = this.objectToArray(data);
+      }else{
+        var arrData = data;
+      }
     }
+
     if (key) {
       this.set(key, arrData);
       return({message: 'Data downloaded and saved to Datapoint property: ' + key,  data: arrData});

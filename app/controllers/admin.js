@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  Data: Ember.inject.service('datapoint'),
   onlineUsers: [],
   existingUsers: Ember.computed.alias('Data.existingUsers'),
   tempUser: '',
