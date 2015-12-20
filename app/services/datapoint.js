@@ -81,7 +81,6 @@ export default Ember.Service.extend({
     return promise;
   },
 
-
 /*    SIGN IN AND OUT LOGIC*/
 
   signIn: function(provider){
@@ -274,13 +273,13 @@ export default Ember.Service.extend({
             ref = 'baseRef';
           }
 
-          instruction += 'self.get("' + ref + '")';
+          instruction = self.get(ref);
 
           for (var i = 0; i < childArray.length; i++) {
-            instruction += '.child("' + childArray[i] + '")';
+            instruction = instruction.child(childArray[i]);
           }
 
-          eval(instruction).once('value',
+          instruction.once('value',
             function(snap){
               var values = snap.val();
               var data = self._grabDataHelper(values, key);
@@ -321,13 +320,13 @@ export default Ember.Service.extend({
           if(ref === null){
             ref = 'baseRef';
           }
-          instruction += 'self.get("' + ref + '")';
+          instruction = self.get(ref);
 
           for (var i = 0; i < childArray.length; i++) {
-            instruction += '.child("' + childArray[i] + '")';
+            instruction = instruction.child(childArray[i]);
           }
 
-          eval(instruction).remove(function(){
+          instruction.remove(function(){
                           resolve({message: 'Data erased'});
                         });
 
@@ -358,13 +357,13 @@ export default Ember.Service.extend({
           if(ref === null){
             ref = 'baseRef';
           }
-          instruction += 'self.get("' + ref + '")';
+          instruction = self.get(ref);
 
           for (var i = 0; i < childArray.length; i++) {
-            instruction += '.child("' + childArray[i] + '")';
+            instruction = instruction.child(childArray[i]);
           }
 
-          eval(instruction).set(data, function(){
+          instruction.set(data, function(){
             resolve({message: 'Data Saved'});
           });
         });
@@ -392,13 +391,13 @@ export default Ember.Service.extend({
           if(ref === null){
             ref = 'baseRef';
           }
-          instruction += 'self.get("' + ref + '")';
+          instruction = self.get(ref);
 
           for (var i = 0; i < childArray.length; i++) {
-            instruction += '.child("' + childArray[i] + '")';
+            instruction = instruction.child(childArray[i]);
           }
 
-          eval(instruction).off();
+          instruction.off();
           resolve();
         });
         return promise;
