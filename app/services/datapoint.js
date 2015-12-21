@@ -251,7 +251,7 @@ export default Ember.Service.extend({
   },
 
   // If reference null, defaults to baseRef.
-  grabData: function (reference, childrenArray, dataKey) {
+  grabData: function (reference, childrenArray, dataKey, filtersObj) {
 
     var promise = new Promise(function(resolve, reject){
 
@@ -277,6 +277,27 @@ export default Ember.Service.extend({
 
           for (var i = 0; i < childArray.length; i++) {
             instruction = instruction.child(childArray[i]);
+          }
+
+          if(filtersObj) {
+            if(filtersObj.orderChild) {
+              instruction = instruction.orderByChild(filtersObj.orderChild);
+            }
+            if(filtersObj.equalTo) {
+              instruction = instruction.equalTo(filtersObj.equalTo);
+            }
+            if(filtersObj.startAt) {
+              instruction = instruction.startAt(filtersObj.startAt);
+            }
+            if(filtersObj.endAt) {
+              instruction = instruction.endAt(filtersObj.endAt);
+            }
+            if(filtersObj.limitToFirst) {
+              instruction = instruction.limitToFirst(filtersObj.limitToFirst);
+            }
+            if(filtersObj.limitToLast) {
+              instruction = instruction.limitToLast(filtersObj.limitToLast);
+            }
           }
 
           instruction.once('value',
