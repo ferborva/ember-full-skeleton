@@ -20,7 +20,7 @@ export default Ember.Route.extend({
       }
 
       // Call Data service checkUser method. True or false, depending on if user found.
-      this.Data.checkUser().then(function(){
+      this.Data.checkUser(transition).then(function(){
         var level = this.get('securityLevel');
         // If no security level is placed, the user will only be required to be logged in.
         if(level === null){

@@ -181,12 +181,14 @@ export default Ember.Service.extend({
   },
 
 
-  checkUser: function(){
+  checkUser: function(transition){
     var promise = new Promise(function(resolve, reject){
       var status = this.get('session.isAuthenticated');
       if(status){
         resolve(true);
+        return;
       }
+      self.set('entryTransition', transition);
       reject(false);
     }.bind(this));
 
