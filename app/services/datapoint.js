@@ -188,18 +188,19 @@ export default Ember.Service.extend({
         resolve(true);
         return;
       }
-      self.set('entryTransition', transition);
+      this.set('entryTransition', transition);
       reject(false);
     }.bind(this));
 
     return promise;
   },
 
-  checkSecurityLevel: function(level){
+  checkSecurityLevel: function(level, transition){
     var promise = new Promise(function(resolve, reject){
       if(this.get('userData') && this.get('userData.securityLevel') >= level){
         resolve('Access given');
       }else if(this.get('userData') && this.get('userData.securityLevel') === 'No Access'){
+        this.Toast.addToast(this.get('i18n').t('security.notAllowed'), 2000);
         reject('Security not cleared');
       }else{
         this.grabData(null, ['security', 'level'+level], null).then(function(data){
@@ -207,10 +208,11 @@ export default Ember.Service.extend({
           resolve('Access given');
         }.bind(this), function(err){
           // code to handle read error
+          this.set('entryTransition', transition);
           this.set('userData.securityLevel', 'No Access');
           console.log('Security level not high enough.');
 
-          this.Toast.addToast(this.get('i18n').t('security.notAllowed'), 2000, 'rounded');
+          this.Toast.addToast(this.get('i18n').t('security.notAllowed'), 2000);
           reject('Security not cleared');
         }.bind(this));
       }

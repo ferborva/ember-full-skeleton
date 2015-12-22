@@ -28,7 +28,7 @@ export default Ember.Route.extend({
           return true;
         }
         // Call the security check dataNode in Firebase and provide clearance te enter.
-        this.Data.checkSecurityLevel(level).then(function(){
+        this.Data.checkSecurityLevel(level, transition).then(function(){
           console.log('SecurityLevel Cleared');
           resolve('Security cleared');
           return true;
