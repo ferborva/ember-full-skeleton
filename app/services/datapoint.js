@@ -102,6 +102,7 @@ export default Ember.Service.extend({
     this.set('appData', {});
     this.set('userRef', '');
     this.set('userId', null);
+    this.set('entryTransition', null);
     this.get('presenceRef').set(null);
     this.get('session').close().then(function(){
       this.Toast.addToast(this.get('i18n').t('success.loggedOut'), 2000);
@@ -188,7 +189,7 @@ export default Ember.Service.extend({
         resolve(true);
         return;
       }
-      this.set('entryTransition', transition);
+
       reject(false);
     }.bind(this));
 
