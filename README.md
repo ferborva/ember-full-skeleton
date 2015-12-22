@@ -1,9 +1,19 @@
 # Flame Stack
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+WIP - Main Documentation page is being built & project services still under development
 
-LOOK AT THE 'Tutorial.md' file to see the steps followed to get this scaffold layed out.
+Flame Stack is a 'glued-up' solution for speedy webApp development. As Ember enthusiasts we firmly bid on Tomster's framework for all our projects and this wasn't going to be any different. Backed up by Firebase and dabbed with a sweet touch of animations and material design, the Flame Stack calls at your door to become a useful tool when you want to prototype solutions or build small, rich apps in no time.
+
+Tecnologías included in the Stack:
+* Ember 2.0.0
+* Ember Data 2.0.0
+* Firebase
+* Materialize
+* Animate.css
+* ember-cli-i18n
+* jQuery 1.11
+
+(LOOK AT THE 'Tutorial.md' file to see the steps followed to get this scaffold layed out.)
 
 ## Prerequisites
 
@@ -15,40 +25,24 @@ You will need the following things properly installed on your computer.
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
-## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+# Work In Progress
 
-## Running / Development
+* Documentation page Setup
+* Create Yeoman Generator for the project
+* Put together a Sublime Snippets pack
+* Create Mock data setup/use examples
+* Create Demo Apps and tutorials
 
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
+# Further Reading / Useful Links
 
 * [ember.js](http://emberjs.com/)
 * [ember-cli](http://www.ember-cli.com/)
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+* [Firebase](https://www.firebase.com/)
+* [Materialize](http://materializecss.com/)
+* [Animate.css](https://daneden.github.io/animate.css/)
+* [i18n - Ember](https://github.com/DavyJonesLocker/ember-cli-i18n)
