@@ -22,7 +22,7 @@ module.exports = function(environment) {
       defaultLocale: 'es'
     },
     baseURL: '/',
-    locationType: 'auto',
+    location: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

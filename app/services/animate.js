@@ -22,8 +22,14 @@ export default Ember.Service.extend({
 
   },
 
-  goAndHide: function(node, animation){
-
+  goAndHide: function(node, animation, speed){
+    $(node).removeClass('anim-normal anim-slow anim-fast');
+    if (speed) {
+      var animspeed = 'anim-' + speed;
+      $(node).addClass(animspeed);
+    } else {
+      $(node).addClass('anim-normal');
+    }
     var promise = new Promise(function(resolve) {
       var animString = 'animated ' + animation;
       $(node).addClass(animString).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
